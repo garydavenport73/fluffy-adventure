@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta itemprop="adventurelandMapLocation150,150adventurelandMapLocation">
     <title>Clipper</title>
-    <!-- <link rel="stylesheet" href="gameStyles.css"> -->
     <style>
         * {
             box-sizing: border-box;
@@ -53,7 +52,8 @@
             font-family: 'Courier New', Courier, monospace;
             background-color: transparent;
         }
-        /* generic flex container styling--------------------- */
+        /* generic flex container styling
+--------------------- */
         
         .flex-container-column-default {
             display: flex;
@@ -238,7 +238,6 @@
     </div>
     <div><button id='close-button' onclick='self.close()'>Close</button></div>
 
-    <!-- <script src="javascript.js"></script> -->
     <script>
         const soundsByFilename = {}
 
@@ -514,6 +513,7 @@
             }
         }
 
+
         class Tone {
             constructor(frequencyHz = 440, durationMS = 1000, type = "sine", bass = 0, mid = 0, treble = 0) {
                 this.frequencyHz = frequencyHz;
@@ -574,12 +574,17 @@
         }
 
         function soundplay(mysound) {
+            console.log("mysound instanceof Tone");
+            console.log(mysound instanceof Tone);
+
             if (mysound instanceof Audio) {
                 // console.log(mysound);
                 // console.log("it is an instance of an Audio Object!!!!!");
                 if (isPlaying(mysound) === false) {
                     mysound.play();
                 }
+            } else if (mysound instanceof Tone) {
+                mysound.play();
             } else {
                 // console.log(mysound);
                 // console.log("it is a File!!!!!");
@@ -667,6 +672,8 @@
                 // console.log("it is an instance of an Audio Object!!!!!");
                 mysound.pause();
                 mysound.currentTime = 0;
+            } else if (mysound instanceof Tone) {
+                mysound.stop();
             } else {
                 // console.log(mysound);
                 // console.log("it is a File!!!!!");
@@ -1017,6 +1024,8 @@
             }
         }
 
+
+
         function respondToControlsWithRotate(character, game, leftDegrees, rightDegrees, forwardBy, backwardBy) {
 
             let angleInRads = character.angle * 2 * Math.PI / 360.0;
@@ -1168,9 +1177,15 @@
 
         //-------1-------define audio-------1-------
         function defineAudio() {
-            prizeTone = new Tone(110, 200, "triangle", 0, 0, 0);
+
+
             footsteps = new Tone(3, 500, "square", 2, -5, -12);
             clover = new Tone(333, 440, "triangle", 0, 0, 0);
+            insertcoin = new Tone(110, 200, "triangle", 0, 0, 0);
+
+            // footsteps = new Audio("footsteps.mp3");
+            // crash = new Audio("crash.mp3");
+            // insertcoin = new Audio("insertcoin.mp3");
         }
 
         //-------2-------define frame rate-------2-------
@@ -1243,21 +1258,26 @@
             moving = respondToControlsWithMove(clipper, clipperGame, -3, 3, -3, 3, true);
             //console.log(moving);
             if (moving) {
-                footsteps.play();
+                soundplay(footsteps);
             }
 
             let tempy = checkForGrassCollision(grass, clipper);
-
+            //console.log(tempy);
             if (tempy != null) {
+                // makeDissapearInSeconds(tempy, .01);
+                //alert(tempy.characterElement.innerHTML);
                 if (tempy.characterElement.innerHTML == "<pre>🍀</pre>") {
                     spinningMessage("four leaf clover!", clipperGame);
-                    clover.play();
+
                     clipperGame.addToScore(4);
+                    clover.play();
                 } else {
-                    prizeTone.play();
                     clipperGame.addToScore(1);
+                    insertcoin.play();
                 }
                 tempy.setText("");
+
+                //resetAndPlayAudioObject(insertcoin);
             }
 
             timeLeft = timeLeft - 1;
