@@ -461,21 +461,6 @@
             // Space
             // Space
 
-            // setControlLeft(trueOrfalse) {
-            //     this.controlLeft = trueOrfalse;
-            // }
-            // setControlRight(trueOrfalse) {
-            //     this.controlRight = trueOrfalse;
-            // }
-            // setControlUp(trueOrfalse) {
-            //     this.controlUp = trueOrfalse;
-            // }
-            // setControlDown(trueOrfalse) {
-            //     this.controlDown = trueOrfalse;
-            // }
-            // setControlSpace(trueOrfalse) {
-            //     this.controlSpace = trueOrfalse;
-            // }
             changeGameSize(width, height, scoreboardHeight, controlsAreaHeight) {
                 this.height = height;
                 this.width = width;
@@ -1501,16 +1486,6 @@
             moveMissiles(heroPilot, missiles, missileXVelocity);
             moveVillains();
             resizeHero(heroPilot);
-            // if ((cow.getXPosition() >= playAreaWidth - cow.width / 2) || (cow.getXPosition() <= 0 + cow.width / 2)) {
-            //     cowVelocity = -cowVelocity;
-            //     if (cowVelocity > 0) {
-            //         flipVertical(cow);
-            //     } else {
-            //         unflipVertical(cow);
-            //     }
-            // }
-
-
 
             //missiles off screen or missile collision
             for (let i = 0; i < missiles.length; i++) {
@@ -1630,62 +1605,15 @@
 
                 message = new GameCharacter("messageid", "Game Over", playAreaWidth / 2.0, playAreaHeight * .75, 0, doonGame, "1rem");
                 clearInterval(myGameLoopTicker);
-                stopsound(backgroundmusic);
-
-
-                // ///////////UPDATE SCORES IN DATABASE /////////////
-
-                // let finalScore = parseInt(document.getElementById("score").innerHTML);
-                // let currentHighScore = parseInt(document.getElementById("highScore").innerHTML);
-
-                // if (finalScore > currentHighScore) {
-
-                //     alert('new high score');
-                //     let online = navigator.onLine;
-
-                //     if (online != false) {
-
-                //         gameIdentifier = gameIdentifier;
-                //         secretKey = secretKey;
-
-                //         //using POST//
-                //         let xmlhttp = new XMLHttpRequest();
-                //         xmlhttp.open('POST', '../../includes/insert-new-highscore.php', true);
-                //         xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                //         xmlhttp.onload = function() {
-                //             // do something with response or after response
-                //             //alert(this.responseText);
-                //             //console.log(this.responseText);
-                //             window.location.href = window.location.href; //reload window because there is not high score
-                //         };
-
-                //         let postString = 'gameidentifier=' + gameIdentifier + '&finalscore=' + finalScore + '&secretkey=' + secretKey;
-                //         //alert(postString);
-                //         xmlhttp.send(postString);
-                //     }
-                // }
-
-                // //////////////////////////////////////////////////
-
+                stopsound(backgroundmusic); //
 
                 setTimeout(() => {
                     removeCharacter(message);
                     //-------6------- At end of game, add start button back-------6-------
                     document.getElementById("restart-button").style.display = "inline-block";
                 }, 3000)
-
-
-
-                // setTimeout(() => {
-                //     //moveCharacterTo(meteor, playAreaWidth / 2, playAreaHeight / 2);
-                //     //meteor.setText("GAME OVER");
-                // }, 1500);
             }
         }
-
-        // framesPerSecond = 45;
-        // let interval = (1.0 / framesPerSecond) * 1000;
-        // myGameLoopTicker = setInterval(gameLoop, interval);
     </script>
 </body>
 
