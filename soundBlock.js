@@ -121,6 +121,7 @@ function stopsound(mysound) {
 }
 
 function isPlaying(mysound) {
+    //needs coded for Tone objects
     return !mysound.paused;
 }
 
