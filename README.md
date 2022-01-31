@@ -11,6 +11,9 @@ A collection of 2D games that will run in an html browser, mobile friendly.
 
 <img src='screenshot.png'>
 
+### New game 1/31/2022!
+<img src='puffs.png'>
+
 ### For a slightly more sophisticated experience, check out https://www.charwars.net/games/ to try out games with a little better sound experience and you can also subscribe to see new games.  You can print high score certificates and compete with your friends (or enemies).
 
 -------------------------------------
