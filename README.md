@@ -14,8 +14,8 @@ A collection of 2D games that will run in an html browser, mobile friendly.
 ### New game "Puffs" 1/31/2022!
 <img src='puffs.png'>
 
-### New game "Super Puff" 2/22/2022!
-## Now with levels and more sea creatures!
+## New game "Super Puff" 2/22/2022!
+### Now with levels and more sea creatures!
 <img src='superpuff.png'>
 
 
