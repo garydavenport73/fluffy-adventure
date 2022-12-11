@@ -9,7 +9,7 @@ A collection of 2D games that will run in an html browser, mobile friendly.
 ### Really bad oscillator sounds!
 ### Really great fun!
 
-<img src='screenshot.png'>
+<img src='screenshot_original.png'>
 
 ### New game "Puffs" 1/31/2022!
 <img src='puffs.png'>
