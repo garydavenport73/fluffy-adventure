@@ -26,6 +26,9 @@ A collection of 2D games that will run in an html browser, mobile friendly.
 ### Just like flappy bird, but a floppy pig!
 <img src='screenshot_magicpig.png'>
 
+## New game "Space Evaders" 12/10/2022!
+### Give it a try!
+<img src='screenshot.png'>
 
 ### For a slightly more sophisticated experience, check out https://www.charwars.net/ to try out games with a little better sound experience and you can also subscribe to see new games.  You can print high score certificates and compete with your friends (or enemies).
 
