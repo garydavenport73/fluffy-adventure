@@ -30,10 +30,6 @@ function getInnerText(str,tag){
     return str.split("<"+tag+">")[1].trim();
 }
 
-
-
-
-
 function findGameFiles(filename) {
     let tempArr = filename.split(".");
     if (tempArr[tempArr.length - 1] === EXTENSION) {

@@ -181,6 +181,9 @@
                 border: none;
             }
         }
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -192,7 +195,7 @@
             <span id="userName">not logged in</span>
 
             <span>
-                <span>High Score:</span>
+                <!-- <span>High Score:</span> -->
             <span id="highScore">0</span>
             </span>
 
@@ -1176,6 +1179,9 @@
 
         // ---------------------------GAME HERE----------------------------
                 //<main character>🐐</main character>
+        //----------0-------android games modifications---------------
+        document.getElementById("userName").innerHTML=window.document.title;
+        document.getElementById("highScore").innerHTML="<a href='https://www.charwars.net'>CharWars</>";
 
         //-------1-------define audio-------1-------
         function defineAudio() {

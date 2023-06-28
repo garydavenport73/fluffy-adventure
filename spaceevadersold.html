@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Puffs</title>
+    <title>Space Evaders</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        
+
         body {
             font-family: 'Courier New', Courier, monospace;
         }
-        
+
         .noselect,
         #highScoreHeader *,
         #scoreboard *,
@@ -38,36 +38,37 @@
             /* Non-prefixed version, currently
                                         supported by Chrome, Edge, Opera and Firefox */
         }
-        
+
         .orange {
             color: orange;
         }
-        
+
         .grey {
             color: grey;
         }
-        
+
         .character-element {
             font-family: 'Courier New', Courier, monospace;
             background-color: transparent;
         }
+
         /* generic flex container styling
     --------------------- */
-        
+
         .flex-container-column-default {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
-        
+
         .flex-container-row-default {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: space-between;
         }
-        
+
         #controlsArea,
         #highScoreHeader,
         #scoreboard,
@@ -75,7 +76,7 @@
             width: 320px;
             border: 1px solid green;
         }
-        
+
         #btnLeft,
         #btnRight,
         #btnUp,
@@ -83,18 +84,18 @@
             font-size: 2rem;
             color: grey;
         }
-        
+
         #btnSpace {
             color: grey;
             font-size: 2rem;
             /* display: none; */
         }
-        
+
         #highScoreHeader,
         #scoreboard {
             height: 20px
         }
-        
+
         #playArea {
             /* desired height - highscore -scoreboard - control heights =409*/
             /* 569−20−20−120=409*/
@@ -102,19 +103,20 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         #gameArea {
             border: solid 1px orange;
             overflow: hidden;
         }
-        
+
         #playArea>div {
             font-size: 2rem;
         }
-        
+
         #userName {
             background-color: orange;
         }
+
         /* #playAreaParent{
         position:relative;
     } */
@@ -147,6 +149,38 @@
         background-color: transparent;
     } */
         /****************** space up/down controls ******************/
+
+        #space {
+            grid-area: space;
+        }
+
+        #left {
+            grid-area: left;
+        }
+
+        #right {
+            grid-area: right;
+        }
+
+        #up {
+            display: none;
+        }
+
+        #down {
+            display: none;
+        }
+
+        #controlsArea {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            grid-template-rows: 60px 60px;
+            grid-template-areas: 'space space left right' 'space space left right';
+            background-color: transparent;
+        }
+
+        /****************** space up/down controls end ******************/
+        /****************** space up/down controls ******************/
+
         /* #space {
             grid-area: space;
         }
@@ -175,8 +209,39 @@
             background-color: transparent;
         } */
         /****************** space up/down controls end ******************/
-        /****************** left/right up/down controls ******************/
+        /****************** space control ******************/
+        /*         
+         #space {
+            grid-area: space;
+        }
         
+        #left {
+            display: none;
+        }
+        
+        #right {
+            display: none;
+        }
+        
+        #up {
+            display: none;
+        }
+        
+        #down {
+            display: none;
+        }
+        
+        #controlsArea {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto;
+            grid-template-rows: 60px 60px;
+            grid-template-areas: 'space space space space space' 'space space space space space';
+            background-color: transparent;
+
+        }  */
+        /****************** space controls end ******************/
+        /****************** left/right up/down controls ******************/
+        /*         
         #space {
             display: none;
         }
@@ -203,10 +268,10 @@
             grid-template-rows: 60px 60px;
             grid-template-areas: 'left up up right' 'left down down right';
             background-color: transparent;
-        }
+        } */
         /****************** left/right up/down controls end ******************/
         /* https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting */
-        
+
         #controlsArea>div>button {
             width: 100%;
             height: 100%;
@@ -214,7 +279,7 @@
             border-radius: 0;
             -webkit-border-radius: 0px;
         }
-        
+
         #start-button {
             position: absolute;
             display: inline-block;
@@ -225,7 +290,7 @@
             height: 15%;
             z-index: 99;
         }
-        
+
         #restart-button {
             position: absolute;
             display: none;
@@ -236,25 +301,27 @@
             height: 10%;
             z-index: 99;
         }
-        
+
         #close-button {
             background-color: transparent;
             width: 320px;
             /* border: none; */
             border: 1px solid beige;
         }
-        
+
         #close-button:hover {
             background-color: orange;
         }
-        
+
         @media screen and (min-width: 768px) {
             #controlsArea {
                 display: none;
             }
+
             #gameArea {
                 border: none;
             }
+
             #close-button {
                 margin-top: 50px;
                 padding: 10px;
@@ -262,6 +329,8 @@
                 color: tan;
             }
         }
+
+
         a{
             text-decoration: none;
         }
@@ -278,29 +347,29 @@
 
             <span>
                 <!-- <span>High Score:</span> -->
-            <span id="highScore">0</span>
+                <span id="highScore">0</span>
             </span>
 
             <span>
                 <!-- <span>Days:</span> -->
-            <!-- <span id="daysAtHighScore">182</span> -->
+                <!-- <span id="daysAtHighScore">182</span> -->
             </span>
 
         </div>
         <div class="flex-container-row-default" id="scoreboard">
             <span>
-                <span>Fish:</span>
-            <span id="level">100</span>
+                <span>Level:</span>
+                <span id="level">100</span>
             </span>
 
             <span>
                 <span>Score:</span>
-            <span id="score">100</span>
+                <span id="score">100</span>
             </span>
 
             <span>
                 <span>Lives:</span>
-            <span id="lives">100</span>
+                <span id="lives">100</span>
             </span>
         </div>
         <div id="playArea">
@@ -530,13 +599,14 @@
                 this.playAreaDiv = game.playAreaDiv;
                 //make a div inside parent to contain character
                 this.characterElement = document.createElement("div");
-                this.characterElement.innerHTML = this.text;
+                //this.characterElement.innerHTML = this.text;
                 this.characterElement.innerHTML = "<pre>" + this.text + "</pre>";
                 // this.characterElement.classList.add("character-element");
                 this.playAreaDiv.appendChild(this.characterElement);
                 this.characterElement.style.position = "absolute";
                 //give it an id and place 
                 this.characterElement.id = id;
+                this.id = id;
 
                 this.characterElement.style.fontSize = this.fontSize;
 
@@ -586,7 +656,7 @@
                 this.characterElement.style.fontSize = this.fontSize;
                 this.refreshWidthAndHeightOfCharacter();
                 // makeSureOnScreen(this);
-                // console.log(this);
+                // //console.logthis);
             }
             setSizeInEms(numberEm = 1) {
                 this.fontSize = numberEm.toString() + "em";
@@ -602,6 +672,9 @@
                 this.characterElement.style.color = this.color;
 
             }
+            getColor() {
+                return (this.color);
+            }
             setBackgroundColor(color = "transparent") {
                 this.backgroundColor = color;
                 this.characterElement.style.backgroundColor = this.backgroundColor;
@@ -609,20 +682,20 @@
         }
 
         function soundplay(mysound) {
-            //console.log("mysound instanceof Tone");
-            //console.log(mysound instanceof Tone);
+            ////console.log"mysound instanceof Tone");
+            ////console.logmysound instanceof Tone);
 
             if (mysound instanceof Audio) {
-                // console.log(mysound);
-                // console.log("it is an instance of an Audio Object!!!!!");
+                // //console.logmysound);
+                // //console.log"it is an instance of an Audio Object!!!!!");
                 if (isPlaying(mysound) === false) {
                     mysound.play();
                 }
             } else if (mysound instanceof Tone) {
                 mysound.play();
             } else {
-                // console.log(mysound);
-                // console.log("it is a File!!!!!");
+                // //console.logmysound);
+                // //console.log"it is a File!!!!!");
                 filename = mysound;
                 //check to see if it is in list of sounds by filename
                 if (filename in soundsByFilename) {
@@ -660,8 +733,8 @@
 
         function loopsound(mysound) {
             if (mysound instanceof Audio) {
-                // console.log(mysound);
-                // console.log("it is an instance of an Audio Object!!!!!");
+                // //console.logmysound);
+                // //console.log"it is an instance of an Audio Object!!!!!");
                 if (isPlaying(mysound) === false) {
                     mysound.loop = true;
                     mysound.play();
@@ -670,20 +743,20 @@
                 mysound.durationMS = 100000000;
                 mysound.play();
             } else {
-                // console.log(mysound);
-                // console.log("it is a File !!!!!");
+                // //console.logmysound);
+                // //console.log"it is a File !!!!!");
                 filename = mysound;
                 //check to see if it is in list of sounds by filename
                 if (filename in soundsByFilename) {
-                    // console.log(filename, "filename in soundsByFilename!");
+                    // //console.logfilename, "filename in soundsByFilename!");
                     //if its already playing return
                     if (isPlaying(soundsByFilename[filename]) === true) {
-                        // console.log("and playing is true!");
+                        // //console.log"and playing is true!");
                         return;
                     }
                     //if its not playing play it
                     else {
-                        // console.log("and playing is false!, starting to play");
+                        // //console.log"and playing is false!, starting to play");
                         soundsByFilename[filename].loop = true;
                         soundsByFilename[filename].play();
                         return soundsByFilename[filename];
@@ -691,7 +764,7 @@
                 }
                 //it is not in list of sounds by filename
                 else {
-                    // console.log(filename, "filename NOT in soundsByFilename!");
+                    // //console.logfilename, "filename NOT in soundsByFilename!");
                     //make new audio object with filename as key
                     newAudioObject = new Audio(filename);
                     //play new sound
@@ -706,24 +779,24 @@
 
         function stopsound(mysound) {
             if (mysound instanceof Audio) {
-                // console.log(mysound);
-                // console.log("it is an instance of an Audio Object!!!!!");
+                // //console.logmysound);
+                // //console.log"it is an instance of an Audio Object!!!!!");
                 mysound.pause();
                 mysound.currentTime = 0;
             } else if (mysound instanceof Tone) {
                 mysound.stop();
             } else {
-                // console.log(mysound);
-                // console.log("it is a File!!!!!");
+                // //console.logmysound);
+                // //console.log"it is a File!!!!!");
                 filename = mysound;
                 if (filename in soundsByFilename) {
-                    // console.log(soundsByFilename);
-                    // console.log("filename", filename, "in list, trying to pause");
+                    // //console.logsoundsByFilename);
+                    // //console.log"filename", filename, "in list, trying to pause");
 
                     soundsByFilename[filename].pause();
                     soundsByFilename.currentTime = 0;
                 } else {
-                    // console.log(filename, "not found in keys of soundsByFilename{}");
+                    // //console.logfilename, "not found in keys of soundsByFilename{}");
                 }
             }
         }
@@ -736,7 +809,7 @@
                 this.bass = bass;
                 this.mid = mid;
                 this.treble = treble;
-                this.audioCtx = new(window.AudioContext || window.webkitAudioContext);
+                this.audioCtx = new (window.AudioContext || window.webkitAudioContext);
                 this.oscillator = this.audioCtx.createOscillator();
                 this.oscillator.frequency.setValueAtTime(this.frequencyHz, this.audioCtx.currentTime);
                 // "sine", "square", "sawtooth", "triangle" and "custom". The default is "sine".
@@ -920,7 +993,7 @@
         }
 
         function triggerControlRelease(aGame, evt) {
-            //console.log("released ", evt.code);;
+            ////console.log"released ", evt.code);;
             if (
                 (evt.code === "ArrowLeft") ||
                 (evt.target.id === "btnLeft")
@@ -949,16 +1022,7 @@
             }
         }
 
-        function rotateToAngle(character, degrees) {
-            character.angle = degrees % 360;
-            transformProperty = `translate(-50%,-50%) rotate(${character.angle}deg)`;
-            character.characterElement.style.transform = transformProperty;
-        }
 
-        function rotateByAngle(character, degrees) {
-            character.angle = (character.angle - degrees);
-            rotateToAngle(character, character.angle);
-        }
 
         function moveCharacterBy(character, x, y) {
             character.xPosition = character.xPosition + x;
@@ -976,7 +1040,8 @@
 
         function removeCharacter(character) {
             //character.text = "";
-            document.getElementById(character.characterElement.id).remove();
+            // document.getElementById(character.characterElement.id).remove();
+            character.characterElement.remove();
         }
 
         function getXPosition(character) {
@@ -1001,6 +1066,24 @@
 
         function getAngle(character) {
             return character.angle;
+        }
+
+        function rotateToAngle(character, degrees, flip = "none") {
+            character.angle = degrees % 360;
+            let str = "";
+            if (flip === "vertical") {
+                str = "scale(-1,1)";
+            }
+            else if (flip === "horizonal") {
+                str = "scale(1,-1)";
+            }
+            transformProperty = `translate(-50%,-50%) rotate(${character.angle}deg) ${str}`;
+            character.characterElement.style.transform = transformProperty;
+        }
+
+        function rotateByAngle(character, degrees, flip = "none") {
+            character.angle = (character.angle - degrees);
+            rotateToAngle(character, character.angle);
         }
 
         function flipVertical(character) {
@@ -1038,6 +1121,8 @@
                 wideFactor = 0;
             }
             let game = character.game;
+
+            // //console.logcharacter.id, negX, posX, negY, posY, faceDirection, widerEdge);
             if (game.controlLeft === true) {
                 //if will go off screen, don't move, account for width/height of character and amount to move
                 if (faceDirection == true) {
@@ -1189,14 +1274,14 @@
             hitBoxX *= hitboxscale0to1; //text characters usually do not completely fill div
             hitBoxY = (character1.getCharacterHeight() + character2.getCharacterHeight()) / 2.0; //average works well
             hitBoxY *= hitboxscale0to1; //text characters usually do not completely fill div
-            //console.log("hitboxx", hitBoxX, "hitboxy", hitBoxY)
+            ////console.log"hitboxx", hitBoxX, "hitboxy", hitBoxY)
             if ((character1.text === "") || (character2.text === "")) {
                 return false;
             } else if (
                 (Math.abs(character1.getXPosition() - character2.getXPosition()) < hitBoxX) &&
                 (Math.abs(character1.getYPosition() - character2.getYPosition()) < hitBoxY)
             ) {
-                //console.log("!!!!!!!!!!HITS!!!!!!!!!!!");
+                ////console.log"!!!!!!!!!!HITS!!!!!!!!!!!");
                 return true;
             }
         }
@@ -1210,19 +1295,19 @@
 
         // https://www.py4u.net/discuss/986510
 
-        document.addEventListener('gesturestart', function(e) {
+        document.addEventListener('gesturestart', function (e) {
             e.preventDefault();
             // special hack to prevent zoom-to-tabs gesture in safari
             document.body.style.zoom = 0.99;
         });
 
-        document.addEventListener('gesturechange', function(e) {
+        document.addEventListener('gesturechange', function (e) {
             e.preventDefault();
             // special hack to prevent zoom-to-tabs gesture in safari
             document.body.style.zoom = 0.99;
         });
 
-        document.addEventListener('gestureend', function(e) {
+        document.addEventListener('gestureend', function (e) {
             e.preventDefault();
             // special hack to prevent zoom-to-tabs gesture in safari
             document.body.style.zoom = 0.99;
@@ -1250,14 +1335,16 @@
                 }, 1 / 90.0);
             }
         }
-
+    </script>
+    <script>
         // ---------------------------GAME HERE----------------------------
-        //<main character>🐡</main character>
+        //<main character>👾</main character>
         //----------0-------android games modifications---------------
         document.getElementById("userName").innerHTML=window.document.title;
         document.getElementById("highScore").innerHTML="<a href='https://www.charwars.net'>CharWars</>";
 
-        //   1 sounds
+        //-------1-------define audio-------1-------
+
         function defineAudio() {
             blip = new Tone(220, 50, "sine", 0, 0, 0);
             fireball = new Tone(110, 333, "sawtooth", 0, 0, -30);
@@ -1267,172 +1354,126 @@
         }
 
         //-------2-------define frame rate-------2-------
-        framesPerSecond = 45;
-        // let timeLeft = framesPerSecond * 20;
+        framesPerSecond = 30;
         let interval = (1.0 / framesPerSecond) * 1000;
 
 
-        //--------3------define characters and functions
+        //-------3-------define characters and functions------3-------
 
-        fishGame = new MyLittleVideoGame("Puffs");
-        fishGame.setLives(1);
+        spaceEvadersGame = new MyLittleVideoGame("Space Evaders");
+        spaceEvadersGame.setLives(3);
         //constructor(name = "MyLVGame", score = 0, level = 1, lives = 3)
-        fishGame.setBackgroundColor("lightblue");
-        bindControlsToWindow(fishGame);
-        bindButtonControls(fishGame);
+        spaceEvadersGame.setBackgroundColor("grey");
+        bindControlsToWindow(spaceEvadersGame);
+        bindButtonControls(spaceEvadersGame);
 
         leftBorder = 0;
         topBorder = 0;
-        playAreaHeight = fishGame.playAreaHeight;
-        playAreaWidth = fishGame.playAreaWidth;
+        playAreaHeight = spaceEvadersGame.playAreaHeight;
+        playAreaWidth = spaceEvadersGame.playAreaWidth;
         let gameOver = false;
-
-        // if (fishGame.userNameSpan.innerHTML === 'not logged in') {
-        //     fishGame.userNameSpan.style.backgroundColor = "orange";
-        //     fishGame.userNameSpan.style.color = "white";
-        // } else {
-        //     fishGame.userNameSpan.style.backgroundColor = "unset";
-        //     fishGame.userNameSpan.style.color = "black";
-        // }
-
-        let blowFish = new GameCharacter("blowfish", "&#128033;", playAreaWidth / 2, playAreaHeight / 2, 0, fishGame, "2em");
-
-        // &#128033; //blowfish
-        // &#128031; //fish
-        // &#128032; //tropical fish
-        // &#128044; //dolphin
-        // &#128025; //octopus
-        // &#129425; //squid, supplentrol
-        // &#129416; //shark, supplemental
-        // &#129438; //lobster, supplemental
-
-        //make instructions
-        const instructions = new GameCharacter("instructions", "Eat or be eaten!", playAreaWidth / 2, playAreaHeight / 3, 0, fishGame);
-
-        //make bubbles
-        let bubbles = [];
-        for (let i = 0; i < 10; i++) {
-            let randX = randomNumberZeroToNumber(playAreaWidth);
-            let randY = randomNumberZeroToNumber(playAreaHeight);
-            bubbles[i] = new GameCharacter('bubble' + i.toString(), 'o', randX, randY, 0, fishGame, "1em");
-            bubbles[i].setColor("blue");
+        // let levelCompleted = false;
 
 
+
+        //▲
+        let cannon = new GameCharacter("cannon", "&#9650;", playAreaWidth / 2, playAreaHeight - 20, 0, spaceEvadersGame, "3em");
+        //▮
+        let shield1 = new GameCharacter("shield1", "&#9646;", playAreaWidth / 3, playAreaHeight * .85, 0, spaceEvadersGame, "5em");
+        shield1.setColor("orange");
+
+        let shield2 = new GameCharacter("shield2", "&#9646;", playAreaWidth * 2 / 3, playAreaHeight * .85, 0, spaceEvadersGame, "5em");
+        shield2.setColor("orange");
+
+        function makeShields() {
+            shield1 = new GameCharacter("shield1", "&#9646;", playAreaWidth / 3, playAreaHeight * .85, 0, spaceEvadersGame, "5em");
+            shield1.setColor("orange");
+
+            shield2 = new GameCharacter("shield2", "&#9646;", playAreaWidth * 2 / 3, playAreaHeight * .85, 0, spaceEvadersGame, "5em");
+            shield2.setColor("orange");
         }
 
-        //make 12 fish
-        let fishesLeft = 12;
-        let fishes = [];
-        for (let i = 0; i < 12; i++) {
-            let randX = randomNumberZeroToNumber(playAreaWidth);
-            let randY = randomNumberZeroToNumber(playAreaHeight);
-            fishes[i] = new GameCharacter('fish' + i.toString(), '&#128031;', randX, randY, 0, fishGame, "2em");
-            fishes[i]['cycles_until_change'] = randomNumberZeroToNumber(90); //number of cycles before changing direction
-            fishes[i]['count'] = 0;
-            fishes[i].xVelocity = randomNumberZeroToNumber(4) - 2; //0,1,2,3,4 - 2 => result range -2 -1 0 1 2 
-            fishes[i].yVelocity = randomNumberZeroToNumber(2) - 1 // 0,1,2  - 1 => -1 0 1 are possible results
-            if (fishes[i].xVelocity >= 0) {
-                flipVertical(fishes[i]);
-            }
-        }
+        let cannonBullet = new GameCharacter("cannon-bullet", ".", cannon.getXPosition(), cannon.getYPosition(), 0, spaceEvadersGame,
+            "3em");
+        cannonBullet.setColor("blue");
 
-        function moveBubbles(speed) {
-            for (let i = 0; i < 10; i++) {
-                //let yMove = -speed
-                let xMove = 1 - randomNumberZeroToNumber(2); //gives -1, 0 or 1
-                if (bubbles[i].getYPosition() - speed <= 0) {
-                    //add height and restart x
-                    moveCharacterTo(bubbles[i], randomNumberZeroToNumber(playAreaWidth), playAreaHeight);
-                } else {
-                    //move bubble up
-                    moveCharacterBy(bubbles[i], 1 - randomNumberZeroToNumber(2), -speed); //gives -1, 0 or 1
+        let alienBullet;
+
+
+
+        let cannonBulletVelocity = 0;
+        let alienBulletVelocity = 0;
+
+        let aliens = [];
+        let alienColumns = 4;
+        let alienRows = 4;
+        let alienSpeed = 1;
+        function placeAliens() {
+            aliens = [];
+            for (let i = 0; i < alienColumns; i++) {
+                for (let j = 0; j < alienRows; j++) {
+                    ////console.logi, j);
+                    let alienXPosition = j * 40 + 100;
+                    let alienYPosition = i * 40 + 50;
+                    // alien '&#128126;'
+                    aliens[i * 4 + j] = new GameCharacter('alien' + i.toString() + j.toString(), '&#128126;', alienXPosition, alienYPosition, 0, spaceEvadersGame, "2em");
+                    //aliens[i * 4 + j] = new GameCharacter('alien' + i.toString() + j.toString(), '@', alienXPosition, alienYPosition, 0, spaceEvadersGame, "2em");
                 }
             }
         }
+        placeAliens();
 
-        function moveFishes() {
-            for (let i = 0; i < fishes.length; i++) {
-                moveCharacterBy(fishes[i], fishes[i].xVelocity, fishes[i].yVelocity);
-                if ((fishes[i].getXPosition() > playAreaWidth) || (fishes[i].getXPosition() < 0)) {
-                    fishes[i].xVelocity = -fishes[i].xVelocity;
-                }
-                if ((fishes[i].getYPosition() > playAreaHeight) || (fishes[i].getYPosition() < 0)) {
-                    fishes[i].yVelocity = -fishes[i].yVelocity;
-                }
-                if (fishes[i].xVelocity >= 0) {
-                    flipVertical(fishes[i]);
-                } else {
-                    unflipVertical(fishes[i]);
-                }
-            }
+        function moveToLeftBorder() {
+
         }
 
-        function checkForFishCollisions() {
-            for (let i = 0; i < fishes.length; i++) {
-                for (let j = 0; j < fishes.length; j++) {
-                    if (i != j) {
-                        //console.log(i, j);
-                        if (collisionDetect(fishes[i], fishes[j])) {
-                            soundplay(blip);
-                            console.log("collision detected");
-                            console.log(i, j);
-                            if (fishes[i].getSizeInEms() >= fishes[j].getSizeInEms()) {
-                                fishes[i].setSizeInEms((fishes[i].getSizeInEms()) + 1);
-                                fishes[j].setText("");
-                            } else {
-                                fishes[j].setSizeInEms((fishes[j].getSizeInEms()) + 1);
-                                fishes[i].setText("");
-                            }
-                            fishesLeft = fishesLeft - 1;
-                        };
+        function moveToRightBorder() {
+
+        }
+
+        function moveAliens() {
+            ySpeed = 0;
+
+            for (let i = 0; i < aliens.length; i++) {
+                if (alienSpeed > 0) { //if moving right, check for any position > right
+                    for (let j = 0; j < aliens.length; j++) {
+                        if ((aliens[j].getXPosition() + alienSpeed > playAreaWidth) && (aliens[j].text === "&#128126;")) {
+                            moveToRightBorder();
+                            alienSpeed = -alienSpeed;
+                            ySpeed = 20;
+
+                            break;
+                        }
                     }
-
-                }
-            }
-        }
-
-        function checkForBlowFishCollision() {
-            for (let i = 0; i < fishes.length; i++) {
-                if (collisionDetect(blowFish, fishes[i])) {
-                    if (blowFish.getSizeInEms() >= fishes[i].getSizeInEms()) {
-                        blowFish.setSizeInEms(blowFish.getSizeInEms() + 1);
-                        fishes[i].setText("");
-                        fishGame.addToScore(1);
-                        fishesLeft = fishesLeft - 1;
-                        soundplay(insertCoin);
-                    } else {
-
-                        fishes[i].setSizeInEms(fishes[i].getSizeInEms() + 1);
-                        blowFish.setText("");
-                        fishGame.setLives(0);
-                        soundplay(fireball);
-                    }
-                }
-
-            }
-        }
-
-        function checkForEnd() {
-            if (fishesLeft === 0) {
-                //alert("end");
-                gameOver = true;
-            }
-            if (fishesLeft === 1) {
-                for (let i = 0; i < fishes.length; i++) {
-                    if (fishes[i].text != '') {
-                        //alert(i);
-                        if (blowFish.getSizeInEms() >= fishes[i].getSizeInEms()) {
-                            //do nothing alert("you win");
-                        } else {
-                            //alert("you lose");
-                            fishGame.setLives(0);
-
+                } else { //going left
+                    for (let j = 0; j < aliens.length; j++) {
+                        if ((aliens[j].getXPosition() + alienSpeed < 0) && (aliens[j].text === "&#128126;")) {
+                            moveToLeftBorder();
+                            alienSpeed = -alienSpeed;
+                            ySpeed = 20;
+                            break;
                         }
                     }
                 }
             }
-
+            for (let i = 0; i < aliens.length; i++) {
+                moveCharacterBy(aliens[i], alienSpeed, ySpeed); //move in direction of speed
+                if (aliens[i].getYPosition() > playAreaHeight - 40) {
+                    gameOver = true;
+                }
+            }
         }
+
+
+        // const plants = [];
+
+        // plants0 = new GameCharacter("line0", ".   .   .   .\n  .   .   .   .\n.   .   .   .\n  .   .   .   .\n.   .   .   .\n  .   .   .   .\n.   .   .   .\n  .   .   .   .\n.   .   .   .\n  .   .   .   .\n.   .   .   .\n  .   .   .   .\n", playAreaWidth / 2, playAreaHeight / 2, 0, spaceEvadersGame, "2rem");
+        // plants0.setColor("green");
+
+        // plants1 = new GameCharacter("line1", ".   .   .   .\n  .   .   .   .\n.   .   .   .\n  .   .   .   .\n.   .   .   .\n  .   .   .   .\n.   .   .   .\n  .   .   .   .\n.   .   .   .\n  .   .   .   .\n", playAreaWidth / 2 + playAreaWidth, playAreaHeight / 2, 0, spaceEvadersGame, "2rem");
+        // plants1.setColor("green");
+;
+
 
         //-------4-------make game run with start button and restart buttons -------4-------
         document.getElementById("start-button").addEventListener("click", startGame);
@@ -1440,37 +1481,185 @@
 
         function startGame() {
             //makes start button dissappear
-            this.style.display = "none";
-            instructions.setText("");
+            if (document.getElementById("start-button").style.display != "none") { //if not undefined
+                document.getElementById("start-button").style.display = "none";
+            }
             defineAudio();
+
             soundplay(insertCoin); //Need to restart here
             //soundplay(backgroundmusic);
             loopsound(backgroundmusic);
+
+
             //start game loop
             setTimeout(() => {
                 myGameLoopTicker = setInterval(gameLoop, interval);
             }, 1000);
+
         }
 
-        //----------game loop ---------------
+        function fireCannon() {
+            cannonBulletVelocity = -7;
+            //console.log"fire cannon called");
+        }
+
+        function fireAlienCannon() {
+            //console.log"alien fire called");
+            if (alienBulletVelocity === 0) {
+                //no bullett travelling;
+                let alienIndex = randomNumberZeroToNumber(aliens.length - 1);
+                alienBullet = new GameCharacter("alien-bullet", ".", aliens[alienIndex].getXPosition(), aliens[alienIndex].getYPosition(), 0, spaceEvadersGame, "3rem");
+                alienBulletVelocity = 2;
+            }
+        }
+        //-------5------- Make Game Loop -------5-------
+        let coolCounter = 0;
 
         function gameLoop() {
-            moveBubbles(1);
-            moveFishes();
-            checkForFishCollisions();
-            if (respondToControlsWithMove(blowFish, -1, 1, -1, 1, true)) {
+            moveAliens();
+
+            //move cannon
+            if (respondToControlsWithMove(cannon, -3, 3, 0, 0, false)) {
                 soundplay(swimTone);
             }
 
-            checkForBlowFishCollision();
-            checkForEnd();
+            if (spaceEvadersGame.getControlSpace()) {
+                //if bullet not flying, launch bullet
+                fireCannon();
+            }
+            if ((randomNumberZeroToNumber(100) > 90)) {
+                fireAlienCannon();
+            }
+            if (alienBullet !== undefined) {
+                moveCharacterBy(alienBullet, 0, 3);
+                if (collisionDetect(alienBullet, cannonBullet,0.1)) {
+                    alienBullet.setText("");
+                    removeCharacter(alienBullet);
+                    alienBulletVelocity = 0;
+                    cannonBulletVelocity = 0;
+                    moveCharacterTo(cannonBullet, cannon.getXPosition(), cannon.getYPosition());
 
-            if ((fishGame.getLives() <= 0) || (gameOver === true)) {
+                }
 
-                message = new GameCharacter("messageid", "Game Over", playAreaWidth / 2.0, playAreaHeight * .75, 0, fishGame, "1rem");
+                if (collisionDetect(alienBullet, cannon)) {
+                    cannon.setText("");
+                    cannonBullet.setText("");
+                    spaceEvadersGame.subtractLives(1);
+                    soundplay(fireball);
+                    let explosion = new GameCharacter("explosion", "&#128293;", cannon.getXPosition(), cannon.getYPosition(), 0, spaceEvadersGame, "2rem");
+                    setTimeout(() => {
+                        removeCharacter(explosion);
+                        cannon.setText("&#9650;");
+                        cannonBullet.setText(".");
+                    }, 1000);
+                }
+                else if (alienBullet.getYPosition() > playAreaHeight) {
+                    alienBulletVelocity = 0;
+                    removeCharacter(alienBullet);
+                }
+                else if (shield1 !== undefined) {
+                    if (collisionDetect(alienBullet, shield1)) {
+                        alienBullet.setText("");
+                        removeCharacter(alienBullet);
+                        alienBulletVelocity = 0;
+
+                        if (shield1.getColor() === "orange") {
+                            shield1.setColor("orangered");
+                        }
+                        else if (shield1.getColor() === "orangered") {
+                            shield1.setColor("red");
+                        }
+                        else if (shield1.getColor() === "red") {
+                            removeCharacter(shield1);
+                        }
+                    }
+                }
+                else if (shield2 !== undefined) {
+                    if (collisionDetect(alienBullet, shield2)) {
+                        alienBullet.setText("");
+                        removeCharacter(alienBullet);
+                        alienBulletVelocity = 0;
+
+                        if (shield2.getColor() === "orange") {
+                            shield2.setColor("orangered");
+                        }
+                        else if (shield2.getColor() === "orangered") {
+                            shield2.setColor("red");
+                        }
+                        else if (shield2.getColor() === "red") {
+                            removeCharacter(shield2);
+                        }
+                    }
+                }
+            }
+
+            if (cannonBulletVelocity === 0) {
+                moveCharacterTo(cannonBullet, cannon.getXPosition(), cannon.getYPosition());
+            }
+            else {
+                moveCharacterBy(cannonBullet, 0, cannonBulletVelocity);
+            }
+
+            //check for bullet off screen
+            if (cannonBullet.getYPosition() < 0) {
+                cannonBulletVelocity = 0;
+                moveCharacterTo(cannonBullet, cannon.getXPosition(), cannon.getYPosition());
+            }
+
+            //check for bullet/alien collision
+
+            for (let i = 0; i < aliens.length; i++) {
+                ////console.logaliens.length);
+                if (collisionDetect(cannonBullet, aliens[i])) {
+                    //aliens[i].setText("");
+
+                    removeCharacter(aliens[i]);
+                    aliens.splice(i, 1);
+                    cannonBulletVelocity = 0;
+                    moveCharacterTo(cannonBullet, cannon.getXPosition(), cannon.getYPosition());
+                    spaceEvadersGame.addToScore(1);
+                }
+            }
+
+            //check for all aliens killed
+            if (aliens.length === 0) {
+                //console.log"*********ALL GONE**********");
+
+                soundplay(fireball);
+
+                placeAliens();
+                removeCharacter(shield1);
+                removeCharacter(shield2);
+                makeShields();
+                soundplay(insertCoin);
+
+
+                spinningMessage("Level Up!", spaceEvadersGame, 1.5);
+                spaceEvadersGame.increaseLevel(1);
+                
+
+                alienSpeed *= 1.5;
+            }
+            //GAME OVER SEQUENCE
+            if ((spaceEvadersGame.getLives() <= 0) || (gameOver)) {
+                let overMessage = "Game Over";
+                if (spaceEvadersGame.getLevel() > 4) {
+                    overMessage = "You won!\nYou are an excellent defender!";
+                }
+                message = new GameCharacter("messageid", overMessage, playAreaWidth / 2.0, playAreaHeight * .75, 0, spaceEvadersGame, "1rem");
+
                 clearInterval(myGameLoopTicker);
                 stopsound(backgroundmusic); //
 
+                //UPDATE SCORES IN DATABASE 
+                let thisGame = spaceEvadersGame; //!!!! change this line for each game
+
+                let finalScore = parseInt(document.getElementById("score").innerHTML);
+                let currentHighScore = parseInt(document.getElementById("highScore").innerHTML);
+
+                if (finalScore > currentHighScore) {
+
+                }
                 setTimeout(() => {
                     removeCharacter(message);
                     //-------6------- At end of game, add start button back-------6-------
@@ -1479,6 +1668,7 @@
             }
         }
     </script>
+
 </body>
 
 </html>

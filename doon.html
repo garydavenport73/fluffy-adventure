@@ -233,6 +233,9 @@
                 color: tan;
             }
         }
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -244,8 +247,8 @@
         <div class="flex-container-row-default" id="highScoreHeader">
             <span id="userName">not logged in</span>
 
-            <span>
-                <span>High Score:</span>
+            <!-- <span>
+                <span>High Score:</span> -->
             <span id="highScore">0</span>
             </span>
 
@@ -1213,6 +1216,9 @@
 
         // ---------------------------GAME HERE----------------------------
         //<main character>🚁</main character>
+        //----------0-------android games modifications---------------
+        document.getElementById("userName").innerHTML=window.document.title;
+        document.getElementById("highScore").innerHTML="<a href='https://www.charwars.net'>CharWars</>";
         function defineAudio() {
 
             gunshot = new Tone(110, 100, "sawtooth", 12, 0, -12);
@@ -1252,7 +1258,7 @@
         playAreaHeight = doonGame.playAreaHeight;
         playAreaWidth = doonGame.playAreaWidth;
 
-        if (doonGame.userNameSpan.innerHTML = 'not logged in') {
+        if (doonGame.userNameSpan.innerHTML === 'not logged in') {
             doonGame.userNameSpan.style.backgroundColor = "orange";
             doonGame.userNameSpan.style.color = "white";
         } else {

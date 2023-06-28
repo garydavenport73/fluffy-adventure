@@ -262,6 +262,9 @@
                 color: tan;
             }
         }
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -274,7 +277,7 @@
             <span id="userName">not logged in</span>
 
             <span>
-                <span>High Score:</span>
+                <!-- <span>High Score:</span> -->
             <span id="highScore">0</span>
             </span>
 
@@ -1250,6 +1253,9 @@
 
         // ---------------------------GAME HERE----------------------------
         //<main character>🐡</main character>
+        //----------0-------android games modifications---------------
+        document.getElementById("userName").innerHTML=window.document.title;
+        document.getElementById("highScore").innerHTML="<a href='https://www.charwars.net'>CharWars</>";
         //   1 sounds
         function defineAudio() {
             blip = new Tone(220, 50, "sine", 0, 0, 0);
@@ -1280,7 +1286,7 @@
         playAreaWidth = fishGame.playAreaWidth;
         let gameOver = false;
 
-        // if (fishGame.userNameSpan.innerHTML = 'not logged in') {
+        // if (fishGame.userNameSpan.innerHTML === 'not logged in') {
         //     fishGame.userNameSpan.style.backgroundColor = "orange";
         //     fishGame.userNameSpan.style.color = "white";
         // } else {

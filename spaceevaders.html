@@ -12,9 +12,13 @@
             margin: 0;
             padding: 0;
         }
+        html {
+            background-color:lightgrey;
+        }
 
         body {
             font-family: 'Courier New', Courier, monospace;
+            margin: auto;
         }
 
         .noselect,
@@ -60,6 +64,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width: 100%;
         }
 
         .flex-container-row-default {
@@ -73,7 +78,7 @@
         #highScoreHeader,
         #scoreboard,
         #playArea {
-            width: 320px;
+            width: 100%;
             border: 1px solid green;
         }
 
@@ -99,7 +104,7 @@
         #playArea {
             /* desired height - highscore -scoreboard - control heights =409*/
             /* 569−20−20−120=409*/
-            height: 409px;
+            height: 470px;
             position: relative;
             overflow: hidden;
         }
@@ -302,17 +307,29 @@
             z-index: 99;
         }
 
-        #close-button {
-            background-color: transparent;
-            width: 320px;
-            /* border: none; */
-            border: 1px solid beige;
+
+
+        #highScore a{
+            text-decoration: none;
         }
 
-        #close-button:hover {
+        #highScore a:hover{
             background-color: orange;
         }
 
+        @media screen and (min-width: 375px) {
+            /* #controlsArea,
+        #highScoreHeader,
+        #scoreboard,
+        #playArea {
+            width: 375px;
+            border: 1px solid green;
+        } */
+        .flex-container-column-default{
+            width: 375px;
+        }
+        }
+        
         @media screen and (min-width: 768px) {
             #controlsArea {
                 display: none;
@@ -322,30 +339,40 @@
                 border: none;
             }
 
-            #close-button {
-                margin-top: 50px;
-                padding: 10px;
-                border: 1px solid beige;
-                color: tan;
-            }
+
+        }
+        #close-button {
+            background-color: transparent;
+            border: 1px solid beige;
+            width: 100%;
+
         }
 
-        #piglet {
-            z-index: 999;
+        #close-button:hover {
+            background-color: orange;
+        }
+
+        #close-button a{
+            display: inline-block;
+            text-decoration: none;
+            width: 100%;
+        }
+        a{
+            text-decoration: none;
         }
     </style>
 </head>
 
 <body class="flex-container-column-default">
-        <!--<div><button id='close-button' onclick='self.close()'>Close</button></div>-->
-    <div><button id='close-button'><a href="index.html">Close</a></button></div>
+            <!--<div><button id='close-button' onclick='self.close()'>Close</button></div>-->
+            <span class="flex-container-column-default"><button id='close-button'><a href="index.html">Close</a></button></span>    
     <div class="flex-container-column-default" id="gameArea">
-
+        
         <div class="flex-container-row-default" id="highScoreHeader">
             <span id="userName">not logged in</span>
 
             <span>
-                <span>High Score:</span>
+                <!-- <span>High Score:</span> -->
                 <span id="highScore">0</span>
             </span>
 
@@ -386,299 +413,369 @@
         </div>
     </div>
     <script>
-        const soundsByFilename = {}
+        const soundsByFilename = {};
+        // ////////////////////////////////////
+        // // Constructor Function
+        // function Color(r, g, b) {
+        //     this.r = r;
+        //     this.g = g;
+        //     this.b = b;
+        // }
 
-        class MyLittleVideoGame {
+        // Color.prototype.rgb = function () {
+        //     const { r, g, b } = this;
+        //     return `rgb(${r}, ${g}, ${b})`;
+        // };
+
+        // Color.prototype.hex = function () {
+        //     const { r, g, b } = this;
+        //     return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        // };
+        // ////////////////////////////////
+
+        function MyLittleVideoGame(name = "MyLVGame", score = 0, level = 1, lives = 3) {
             // constructor(name = "MyLVGame", width = 320, height = 569, scoreboardHeight = 20, score = 0, level = 0, lives = 3) {
-            constructor(name = "MyLVGame", score = 0, level = 1, lives = 3) {
-                this.name = name;
-                this.highScoreHeaderDiv = document.getElementById("highScoreHeader");
-                this.scoreboardDiv = document.getElementById("scoreboard");
-                this.gameAreaDiv = document.getElementById("gameArea");
-                this.playAreaDiv = document.getElementById("playArea");
-                this.controlsAreaDiv = document.getElementById("controlsArea");
-                this.levelAreaSpan = document.getElementById("level");
-                this.userNameSpan = document.getElementById("userName");
+            //constructor(name = "MyLVGame", score = 0, level = 1, lives = 3) 
 
-                //this.width = width;  //get general width
-                let stringPixelWidth = document.defaultView.getComputedStyle(this.playAreaDiv).width;
-                let intPixelWidth = parseInt(stringPixelWidth.substring(0, stringPixelWidth.length - 2));
-                this.width = intPixelWidth;
+            this.name = name;
+            this.highScoreHeaderDiv = document.getElementById("highScoreHeader");
+            this.scoreboardDiv = document.getElementById("scoreboard");
+            this.gameAreaDiv = document.getElementById("gameArea");
+            this.playAreaDiv = document.getElementById("playArea");
+            this.controlsAreaDiv = document.getElementById("controlsArea");
+            this.levelAreaSpan = document.getElementById("level");
+            this.userNameSpan = document.getElementById("userName");
 
-                //get high score header height
-                let strHSPixelHeight = document.defaultView.getComputedStyle(this.highScoreHeaderDiv).height;
-                let intHSPixelHeight = parseInt(strHSPixelHeight.substring(0, strHSPixelHeight.length - 2));
-                this.highScoreHeaderHeight = intHSPixelHeight;
+            //this.width = width;  //get general width
+            let stringPixelWidth = document.defaultView.getComputedStyle(this.playAreaDiv).width;
+            let intPixelWidth = parseInt(stringPixelWidth.substring(0, stringPixelWidth.length - 2));
+            this.width = intPixelWidth;
 
-                //get scoreboard height
-                //this.scoreboardHeight = scoreboardHeight;
-                let strSCPixelHeight = document.defaultView.getComputedStyle(this.scoreboardDiv).height;
-                let intSCPixelHeight = parseInt(strSCPixelHeight.substring(0, strSCPixelHeight.length - 2));
-                this.scoreboardHeight = intSCPixelHeight;
+            //get high score header height
+            let strHSPixelHeight = document.defaultView.getComputedStyle(this.highScoreHeaderDiv).height;
+            let intHSPixelHeight = parseInt(strHSPixelHeight.substring(0, strHSPixelHeight.length - 2));
+            this.highScoreHeaderHeight = intHSPixelHeight;
 
-                //get playAreaWidth
-                this.playAreaWidth = this.width;
+            //get scoreboard height
+            //this.scoreboardHeight = scoreboardHeight;
+            let strSCPixelHeight = document.defaultView.getComputedStyle(this.scoreboardDiv).height;
+            let intSCPixelHeight = parseInt(strSCPixelHeight.substring(0, strSCPixelHeight.length - 2));
+            this.scoreboardHeight = intSCPixelHeight;
 
-                //get playAreaHeight
-                let strPAPixelHeight = document.defaultView.getComputedStyle(this.playAreaDiv).height;
-                let intPAPixelHeight = parseInt(strPAPixelHeight.substring(0, strPAPixelHeight.length - 2));
-                this.playAreaHeight = intPAPixelHeight;
+            //get playAreaWidth
+            this.playAreaWidth = this.width;
 
-                //get controls area height
-                let strCAPixelHeight = document.defaultView.getComputedStyle(this.controlsAreaDiv).height;
-                let intCAPixelHeight = parseInt(strCAPixelHeight.substring(0, strCAPixelHeight.length - 2));
-                this.controlsAreaHeight = intCAPixelHeight;
+            //get playAreaHeight
+            let strPAPixelHeight = document.defaultView.getComputedStyle(this.playAreaDiv).height;
+            let intPAPixelHeight = parseInt(strPAPixelHeight.substring(0, strPAPixelHeight.length - 2));
+            this.playAreaHeight = intPAPixelHeight;
 
-                //get controls area width
-                let strCAPixelWidth = document.defaultView.getComputedStyle(this.controlsAreaDiv).width;
-                let intCAPixelWidth = parseInt(strCAPixelWidth.substring(0, strCAPixelWidth.length - 2));
-                this.controlsAreaWidth = intCAPixelWidth;
+            //get controls area height
+            let strCAPixelHeight = document.defaultView.getComputedStyle(this.controlsAreaDiv).height;
+            let intCAPixelHeight = parseInt(strCAPixelHeight.substring(0, strCAPixelHeight.length - 2));
+            this.controlsAreaHeight = intCAPixelHeight;
 
-                //this.height = height;
-                //height = total height = playAreaHeight + scoreboardheight*2 + contraols area height
-                //height  = highscoreheader + scoreboard + playareaHeight + controls area height 
-                this.height = this.highScoreHeaderHeight + this.scoreboardHeight + this.playAreaHeight + this.controlsAreaHeight;
+            //get controls area width
+            let strCAPixelWidth = document.defaultView.getComputedStyle(this.controlsAreaDiv).width;
+            let intCAPixelWidth = parseInt(strCAPixelWidth.substring(0, strCAPixelWidth.length - 2));
+            this.controlsAreaWidth = intCAPixelWidth;
 
-                //this.controlsAreaHeight = controlsAreaHeight;
-                this.score = score;
-                this.level = level;
-                this.lives = lives;
+            //this.height = height;
+            //height = total height = playAreaHeight + scoreboardheight*2 + contraols area height
+            //height  = highscoreheader + scoreboard + playareaHeight + controls area height 
+            this.height = this.highScoreHeaderHeight + this.scoreboardHeight + this.playAreaHeight + this.controlsAreaHeight;
 
-                //this.changeGameSize(this.width, this.height, this.scoreboardHeight, this.controlsAreaHeight);
+            //this.controlsAreaHeight = controlsAreaHeight;
+            this.score = score;
+            this.level = level;
+            this.lives = lives;
 
-                //this.playAreaWidth = this.width;
-                //this.playAreaHeight = this.height - this.scoreboardHeight * 2.0 - this.controlsAreaHeight;
-                this.controlLeft = false;
-                this.controlRight = false;
-                this.controlUp = false;
-                this.controlDown = false;
-                this.controlSpace = false;
-                this.soundsByFilename = {};
-                this.setTitle(this.name);
-                this.setScore(this.score);
-                this.setLevel(this.level);
-                this.setLives(this.lives);
-                this.highScoreHeaderDiv.addEventListener("dblclick", (evt) => {
-                    evt.preventDefault()
-                });
-                this.scoreboardDiv.addEventListener("dblclick", (evt) => {
-                    evt.preventDefault()
-                });
-                this.gameAreaDiv.addEventListener("dblclick", (evt) => {
-                    evt.preventDefault()
-                });
-                this.playAreaDiv.addEventListener("dblclick", (evt) => {
-                    evt.preventDefault()
-                });
-                this.controlsAreaDiv.addEventListener("dblclick", (evt) => {
-                    evt.preventDefault()
-                });
-            }
+            //this.changeGameSize(this.width, this.height, this.scoreboardHeight, this.controlsAreaHeight);
 
-            setTitle(title) {
-                window.document.title = title;
-            }
+            //this.playAreaWidth = this.width;
+            //this.playAreaHeight = this.height - this.scoreboardHeight * 2.0 - this.controlsAreaHeight;
+            this.controlLeft = false;
+            this.controlRight = false;
+            this.controlUp = false;
+            this.controlDown = false;
+            this.controlSpace = false;
+            this.soundsByFilename = {};
+            this.setTitle(this.name);
+            this.setScore(this.score);
+            this.setLevel(this.level);
+            this.setLives(this.lives);
+            this.highScoreHeaderDiv.addEventListener("dblclick", (evt) => {
+                evt.preventDefault()
+            });
+            this.scoreboardDiv.addEventListener("dblclick", (evt) => {
+                evt.preventDefault()
+            });
+            this.gameAreaDiv.addEventListener("dblclick", (evt) => {
+                evt.preventDefault()
+            });
+            this.playAreaDiv.addEventListener("dblclick", (evt) => {
+                evt.preventDefault()
+            });
+            this.controlsAreaDiv.addEventListener("dblclick", (evt) => {
+                evt.preventDefault()
+            });
 
-            // score keeping
-            getScore() {
-                return parseInt(document.getElementById("score").innerHTML);
-            }
-            setScore(score) {
-                this.score = score;
-                document.getElementById("score").innerHTML = this.score;
-            }
-            addToScore(amount) {
-                this.setScore(this.getScore() + parseInt(amount));
+            /*
+            Color.prototype.rgb = function() {
+                const { r, g, b } = this;
+                return `rgb(${r}, ${g}, ${b})`;
+            };
+            */
 
-            }
-            subtractFromScore(amount) {
-                this.setScore(this.getScore() - parseInt(amount));
-            }
 
-            //level tracking
-            getLevel() {
-                return parseInt(document.getElementById("level").innerHTML);
-            }
-            setLevel(level) {
-                this.level = level;
-                document.getElementById("level").innerHTML = this.level.toString();
-            }
-            increaseLevel(amount) {
-                this.setLevel(this.getLevel() + parseInt(amount));
-            }
-            decreaseLevel(amount) {
-                this.setLevel(this.getLevel() - parseInt(amount));
-            }
-
-            //lives
-            getLives() {
-                return parseInt(document.getElementById("lives").innerHTML);
-            }
-            setLives(lives) {
-                this.lives = lives;
-                document.getElementById("lives").innerHTML = this.lives.toString();
-            }
-            addLives(amount) {
-                this.setLives(this.getLives() + parseInt(amount));
-            }
-            subtractLives(amount) {
-                this.setLives(this.getLives() - parseInt(amount));
-            }
-            setBackgroundColor(color = "white") {
-                this.playAreaDiv.style.backgroundColor = color;
-            }
-
-            setControlsToFalse() {
-                this.controlLeft = false;
-                this.controlRight = false;
-                this.controlUp = false;
-                this.controlDown = false;
-                this.controlSpace = false;
-            }
-            getControlLeft() {
-                return this.controlLeft;
-            }
-            getControlRight() {
-                return this.controlRight;
-            }
-            getControlUp() {
-                return this.controlUp;
-            }
-            getControlDown() {
-                return this.controlDown;
-            }
-            getControlSpace() {
-                return this.controlSpace;
-            }
-
-            // ArrowLeft
-            // ArrowLeft
-            // ArrowRight
-            // ArrowRight
-            // ArrowUp
-            // ArrowUp
-            // ArrowDown
-            // ArrowDown
-            // Space
-            // Space
-
-            changeGameSize(width, height, scoreboardHeight, controlsAreaHeight) {
-                this.height = height;
-                this.width = width;
-                this.scoreboardHeight = scoreboardHeight;
-                this.controlsAreaHeight = controlsAreaHeight;
-
-                this.highScoreHeaderDiv.style.height = this.scoreboardHeight.toString() + "px";
-                this.highScoreHeaderDiv.style.width = this.width.toString() + "px";
-
-                this.scoreboardDiv.style.height = this.scoreboardHeight.toString() + "px";
-                this.scoreboardDiv.style.width = this.width.toString() + "px";
-
-                this.gameAreaDiv.style.width = this.width.toString() + "px";
-                this.gameAreaDiv.style.height = this.height.toString() + "px";
-
-                this.controlsAreaDiv.style.height = this.controlsAreaHeight.toString() + "px";
-                this.controlsAreaDiv.style.width = this.width.toString() + "px";
-
-                this.playAreaDiv.style.height = (this.height - this.scoreboardHeight * 2 - this.controlsAreaHeight).toString() + "px";
-                this.playAreaDiv.style.width = this.width.toString() + "px";
-            }
         }
 
-        class GameCharacter {
-            constructor(id, text, xPosition, yPosition, angle, game, fontSize = "1rem") {
-                this.text = text;
-                this.xPosition = xPosition;
-                this.yPosition = yPosition;
-                this.angle = angle;
-                this.game = game;
-                this.fontSize = fontSize;
-
-                //get parent div
-                this.playAreaDiv = game.playAreaDiv;
-                //make a div inside parent to contain character
-                this.characterElement = document.createElement("div");
-                //this.characterElement.innerHTML = this.text;
-                this.characterElement.innerHTML = "<pre>" + this.text + "</pre>";
-                // this.characterElement.classList.add("character-element");
-                this.playAreaDiv.appendChild(this.characterElement);
-                this.characterElement.style.position = "absolute";
-                //give it an id and place 
-                this.characterElement.id = id;
-                this.id = id;
-
-                this.characterElement.style.fontSize = this.fontSize;
-
-                // this.leftPlayAreaBorder = 0;
-                // this.rightPlayAreaBorder = this.game.playAreaWidth;
-                // this.topPlayAreaBorder = 0;
-                // this.bottomPlayAreaBorder = this.game.playAreaHeight;
-                this.characterElement.style.left = this.xPosition.toString() + "px";
-                this.characterElement.style.top = this.yPosition.toString() + "px";
-                this.characterElement.style.transform = "translate(-50%, -50%)";
-                this.characterElement.classList.add("noselect");
-                this.characterElement.style.whiteSpace = "nowrap";
-
-                this.refreshWidthAndHeightOfCharacter();
-                rotateToAngle(this, this.angle);
-            }
-
-            refreshWidthAndHeightOfCharacter() {
-                //get width and height of this element
-                this.width = parseFloat((window.getComputedStyle(this.characterElement).width).slice(0, -2));
-                this.height = parseFloat((window.getComputedStyle(this.characterElement).height).slice(0, -2));
-            }
-
-            getXPosition() {
-                return (this.xPosition);
-            }
-            getYPosition() {
-                return (this.yPosition);
-            }
-            getCharacterWidth() {
-                return (this.width);
-            }
-            getCharacterHeight() {
-                return (this.height);
-            }
-            setText(text) {
-                this.text = text;
-                this.characterElement.innerHTML = this.text;
-                this.refreshWidthAndHeightOfCharacter();
-            }
-            keepInPlayArea() {
-                //pass;
-            }
-            setSizeInRems(numberRem = 1) {
-
-                this.fontSize = numberRem.toString() + "rem";
-                this.characterElement.style.fontSize = this.fontSize;
-                this.refreshWidthAndHeightOfCharacter();
-                // makeSureOnScreen(this);
-                // //console.logthis);
-            }
-            setSizeInEms(numberEm = 1) {
-                this.fontSize = numberEm.toString() + "em";
-                this.characterElement.style.fontSize = this.fontSize;
-                this.refreshWidthAndHeightOfCharacter();
-            }
-
-            getSizeInEms() {
-                return parseInt(this.fontSize.substring(0, this.fontSize.length - 2));
-            }
-            setColor(color = "black") {
-                this.color = color;
-                this.characterElement.style.color = this.color;
-
-            }
-            getColor() {
-                return (this.color);
-            }
-            setBackgroundColor(color = "transparent") {
-                this.backgroundColor = color;
-                this.characterElement.style.backgroundColor = this.backgroundColor;
-            }
+        MyLittleVideoGame.prototype.setTitle = function (title) {
+            window.document.title = title;
         }
+        //setTitle(title) {
+        //    window.document.title = title;
+        //}
+        // score keeping
+        MyLittleVideoGame.prototype.getScore = function () {
+            return parseInt(document.getElementById("score").innerHTML);
+        }
+
+        //getScore() {
+        //    return parseInt(document.getElementById("score").innerHTML);
+        //}
+
+        MyLittleVideoGame.prototype.setScore = function (score) {
+            this.score = score;
+            document.getElementById("score").innerHTML = this.score;
+        }
+
+        //setScore(score) {
+        //    this.score = score;
+        //    document.getElementById("score").innerHTML = this.score;
+        // }
+
+        MyLittleVideoGame.prototype.addToScore = function (amount) {
+            this.setScore(this.getScore() + parseInt(amount));
+        }
+        //addToScore(amount) {
+        //    this.setScore(this.getScore() + parseInt(amount));
+        //}
+
+
+        //subtractFromScore(amount) {
+        MyLittleVideoGame.prototype.subtractFromScore = function (amount) {
+            this.setScore(this.getScore() - parseInt(amount));
+        }
+
+        //level tracking
+        //getLevel() {
+        MyLittleVideoGame.prototype.getLevel = function () {
+            return parseInt(document.getElementById("level").innerHTML);
+        }
+
+
+        //setLevel(level) {
+        MyLittleVideoGame.prototype.setLevel = function (level) {
+            this.level = level;
+            document.getElementById("level").innerHTML = this.level.toString();
+        }
+
+        //increaseLevel(amount) {
+        MyLittleVideoGame.prototype.increaseLevel = function (amount) {
+            this.setLevel(this.getLevel() + parseInt(amount));
+        }
+
+
+        //decreaseLevel(amount) {
+        MyLittleVideoGame.prototype.increaseLevel = function (amount) {
+            this.setLevel(this.getLevel() - parseInt(amount));
+        }
+
+        //lives
+        //getLives() {
+        MyLittleVideoGame.prototype.getLives = function () {
+            return parseInt(document.getElementById("lives").innerHTML);
+        }
+        //setLives(lives) {
+        MyLittleVideoGame.prototype.setLives = function (lives) {
+            this.lives = lives;
+            document.getElementById("lives").innerHTML = this.lives.toString();
+        }
+        //addLives(amount) {
+        MyLittleVideoGame.prototype.addLives = function (amount) {
+            this.setLives(this.getLives() + parseInt(amount));
+        }
+        //subtractLives(amount) {
+        MyLittleVideoGame.prototype.subtractLives = function (amount) {
+            this.setLives(this.getLives() - parseInt(amount));
+        }
+        //setBackgroundColor(color = "white") {
+        MyLittleVideoGame.prototype.setBackgroundColor = function (color = "white") {
+            this.playAreaDiv.style.backgroundColor = color;
+        }
+
+
+        MyLittleVideoGame.prototype.setControlsToFalse = function () {
+            //setControlsToFalse() {
+            this.controlLeft = false;
+            this.controlRight = false;
+            this.controlUp = false;
+            this.controlDown = false;
+            this.controlSpace = false;
+        }
+        MyLittleVideoGame.prototype.getControlLeft = function () {
+            //getControlLeft() {
+            return this.controlLeft;
+        }
+        MyLittleVideoGame.prototype.getControlRight = function () {
+            //getControlRight() {
+            return this.controlRight;
+        }
+        MyLittleVideoGame.prototype.getControlUp = function () {
+            //getControlUp() {
+            return this.controlUp;
+        }
+
+        MyLittleVideoGame.prototype.getControlDown = function () {
+            //getControlDown() {
+            return this.controlDown;
+        }
+
+        MyLittleVideoGame.prototype.getControlSpace = function () {
+            //getControlSpace() {
+            return this.controlSpace;
+        }
+
+        // ArrowLeft
+        // ArrowLeft
+        // ArrowRight
+        // ArrowRight
+        // ArrowUp
+        // ArrowUp
+        // ArrowDown
+        // ArrowDown
+        // Space
+        // Space
+
+        MyLittleVideoGame.prototype.changeGameSize = function (width, height, scoreboardHeight, controlsAreaHeight) {
+            //changeGameSize(width, height, scoreboardHeight, controlsAreaHeight) {
+            this.height = height;
+            this.width = width;
+            this.scoreboardHeight = scoreboardHeight;
+            this.controlsAreaHeight = controlsAreaHeight;
+
+            this.highScoreHeaderDiv.style.height = this.scoreboardHeight.toString() + "px";
+            this.highScoreHeaderDiv.style.width = this.width.toString() + "px";
+
+            this.scoreboardDiv.style.height = this.scoreboardHeight.toString() + "px";
+            this.scoreboardDiv.style.width = this.width.toString() + "px";
+
+            this.gameAreaDiv.style.width = this.width.toString() + "px";
+            this.gameAreaDiv.style.height = this.height.toString() + "px";
+
+            this.controlsAreaDiv.style.height = this.controlsAreaHeight.toString() + "px";
+            this.controlsAreaDiv.style.width = this.width.toString() + "px";
+
+            this.playAreaDiv.style.height = (this.height - this.scoreboardHeight * 2 - this.controlsAreaHeight).toString() + "px";
+            this.playAreaDiv.style.width = this.width.toString() + "px";
+        }
+
+
+        function GameCharacter(id, text, xPosition, yPosition, angle, game, fontSize = "1rem") {
+            //constructor(id, text, xPosition, yPosition, angle, game, fontSize = "1rem") {
+            this.text = text;
+            this.xPosition = xPosition;
+            this.yPosition = yPosition;
+            this.angle = angle;
+            this.game = game;
+            this.fontSize = fontSize;
+
+            //get parent div
+            this.playAreaDiv = game.playAreaDiv;
+            //make a div inside parent to contain character
+            this.characterElement = document.createElement("div");
+            //this.characterElement.innerHTML = this.text;
+            this.characterElement.innerHTML = "<pre>" + this.text + "</pre>";
+            // this.characterElement.classList.add("character-element");
+            this.playAreaDiv.appendChild(this.characterElement);
+            this.characterElement.style.position = "absolute";
+            //give it an id and place 
+            this.characterElement.id = id;
+            this.id = id;
+
+            this.characterElement.style.fontSize = this.fontSize;
+
+            // this.leftPlayAreaBorder = 0;
+            // this.rightPlayAreaBorder = this.game.playAreaWidth;
+            // this.topPlayAreaBorder = 0;
+            // this.bottomPlayAreaBorder = this.game.playAreaHeight;
+            this.characterElement.style.left = this.xPosition.toString() + "px";
+            this.characterElement.style.top = this.yPosition.toString() + "px";
+            this.characterElement.style.transform = "translate(-50%, -50%)";
+            this.characterElement.classList.add("noselect");
+            this.characterElement.style.whiteSpace = "nowrap";
+
+            this.refreshWidthAndHeightOfCharacter();
+            rotateToAngle(this, this.angle);
+        }
+
+        GameCharacter.prototype.refreshWidthAndHeightOfCharacter = function () {
+            //get width and height of this element
+            this.width = parseFloat((window.getComputedStyle(this.characterElement).width).slice(0, -2));
+            this.height = parseFloat((window.getComputedStyle(this.characterElement).height).slice(0, -2));
+        }
+
+        GameCharacter.prototype.getXPosition = function () {
+            return (this.xPosition);
+        }
+        GameCharacter.prototype.getYPosition = function () {
+            return (this.yPosition);
+        }
+        GameCharacter.prototype.getCharacterWidth = function () {
+            return (this.width);
+        }
+        GameCharacter.prototype.getCharacterHeight = function () {
+            return (this.height);
+        }
+        GameCharacter.prototype.setText = function (text) {
+            this.text = text;
+            this.characterElement.innerHTML = this.text;
+            this.refreshWidthAndHeightOfCharacter();
+        }
+        GameCharacter.prototype.keepInPlayArea = function () {
+            //pass;
+        }
+        GameCharacter.prototype.setSizeInRems = function (numberRem = 1) {
+
+            this.fontSize = numberRem.toString() + "rem";
+            this.characterElement.style.fontSize = this.fontSize;
+            this.refreshWidthAndHeightOfCharacter();
+            // makeSureOnScreen(this);
+            // //console.logthis);
+        }
+        GameCharacter.prototype.setSizeInEms = function (numberEm = 1) {
+            this.fontSize = numberEm.toString() + "em";
+            this.characterElement.style.fontSize = this.fontSize;
+            this.refreshWidthAndHeightOfCharacter();
+        }
+
+        GameCharacter.prototype.getSizeInEms = function () {
+            return parseInt(this.fontSize.substring(0, this.fontSize.length - 2));
+        }
+        GameCharacter.prototype.setColor = function (color = "black") {
+            this.color = color;
+            this.characterElement.style.color = this.color;
+
+        }
+        GameCharacter.prototype.getColor = function () {
+            return (this.color);
+        }
+        GameCharacter.prototype.setBackgroundColor = function (color = "transparent") {
+            this.backgroundColor = color;
+            this.characterElement.style.backgroundColor = this.backgroundColor;
+        }
+        //}
 
         function soundplay(mysound) {
             ////console.log"mysound instanceof Tone");
@@ -800,64 +897,83 @@
             }
         }
 
-        class Tone {
-            constructor(frequencyHz = 440, durationMS = 1000, type = "sine", bass = 0, mid = 0, treble = 0) {
-                this.frequencyHz = frequencyHz;
-                this.durationMS = durationMS;
-                this.type = type;
-                this.bass = bass;
-                this.mid = mid;
-                this.treble = treble;
-                this.audioCtx = new (window.AudioContext || window.webkitAudioContext);
-                this.oscillator = this.audioCtx.createOscillator();
-                this.oscillator.frequency.setValueAtTime(this.frequencyHz, this.audioCtx.currentTime);
-                // "sine", "square", "sawtooth", "triangle" and "custom". The default is "sine".
-                this.oscillator.type = this.type;
-                this.gainControl = this.audioCtx.createGain();
-                this.gainControl.gain.setValueAtTime(0, this.audioCtx.currentTime);
-                this.bassControl = this.audioCtx.createBiquadFilter();
-                this.bassControl.type = "lowshelf";
-                this.bassControl.frequency.setValueAtTime(210, this.audioCtx.currentTime);
-                this.bassControl.gain.setValueAtTime(this.bass, this.audioCtx.currentTime);
-                this.midControl = this.audioCtx.createBiquadFilter();
-                this.midControl.type = "peaking";
-                //http://www.learningaboutelectronics.com/Articles/Quality-factor-calculator.php#answer
-                this.midControl.Q.setValueAtTime(0.375, this.audioCtx.currentTime);
-                this.midControl.frequency.setValueAtTime(590, this.audioCtx.currentTime);
-                this.midControl.gain.setValueAtTime(this.mid, this.audioCtx.currentTime);
-                this.trebleControl = this.audioCtx.createBiquadFilter();
-                this.trebleControl.type = "highshelf";
-                this.trebleControl.frequency.setValueAtTime(1200, this.audioCtx.currentTime);
-                this.trebleControl.gain.setValueAtTime(this.treble, this.audioCtx.currentTime);
-                this.oscillator.connect(this.bassControl);
-                this.bassControl.connect(this.midControl);
-                this.midControl.connect(this.trebleControl);
-                this.trebleControl.connect(this.gainControl);
-                this.gainControl.connect(this.audioCtx.destination);
-                this.oscillator.start();
-            }
+        ////////////////////////////////////
+        // Constructor Function
+        function Color(r, g, b) {
+            this.r = r;
+            this.g = g;
+            this.b = b;
+        }
 
-            play() {
-                if (this.cancelStop === undefined) { //first call ths.cancelStop not yet defined
-                    //do nothing
-                } else {
-                    clearTimeout(this.cancelStop);
-                }
-                //this.gainControl.gain.cancelScheduledValues(this.audioCtx.currentTime);
-                this.gainControl.gain.setValueAtTime(this.gainControl.gain.value, this.audioCtx.currentTime);
-                this.gainControl.gain.linearRampToValueAtTime(1, this.audioCtx.currentTime + 0.03);
-                this.cancelStop = setTimeout(() => {
-                    this.gainControl.gain.setValueAtTime(this.gainControl.gain.value, this.audioCtx.currentTime);
-                    this.gainControl.gain.linearRampToValueAtTime(0, this.audioCtx.currentTime + 0.03);
-                }, this.durationMS - 30);
-            }
+        Color.prototype.rgb = function () {
+            const { r, g, b } = this;
+            return `rgb(${r}, ${g}, ${b})`;
+        };
 
-            stop() {
+        Color.prototype.hex = function () {
+            const { r, g, b } = this;
+            return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        };
+        ////////////////////////////////
+
+        function Tone(frequencyHz = 440, durationMS = 1000, type = "sine", bass = 0, mid = 0, treble = 0) {
+            //constructor(frequencyHz = 440, durationMS = 1000, type = "sine", bass = 0, mid = 0, treble = 0) {
+            this.frequencyHz = frequencyHz;
+            this.durationMS = durationMS;
+            this.type = type;
+            this.bass = bass;
+            this.mid = mid;
+            this.treble = treble;
+            this.audioCtx = new (window.AudioContext || window.webkitAudioContext);
+            this.oscillator = this.audioCtx.createOscillator();
+            this.oscillator.frequency.setValueAtTime(this.frequencyHz, this.audioCtx.currentTime);
+            // "sine", "square", "sawtooth", "triangle" and "custom". The default is "sine".
+            this.oscillator.type = this.type;
+            this.gainControl = this.audioCtx.createGain();
+            this.gainControl.gain.setValueAtTime(0, this.audioCtx.currentTime);
+            this.bassControl = this.audioCtx.createBiquadFilter();
+            this.bassControl.type = "lowshelf";
+            this.bassControl.frequency.setValueAtTime(210, this.audioCtx.currentTime);
+            this.bassControl.gain.setValueAtTime(this.bass, this.audioCtx.currentTime);
+            this.midControl = this.audioCtx.createBiquadFilter();
+            this.midControl.type = "peaking";
+            //http://www.learningaboutelectronics.com/Articles/Quality-factor-calculator.php#answer
+            this.midControl.Q.setValueAtTime(0.375, this.audioCtx.currentTime);
+            this.midControl.frequency.setValueAtTime(590, this.audioCtx.currentTime);
+            this.midControl.gain.setValueAtTime(this.mid, this.audioCtx.currentTime);
+            this.trebleControl = this.audioCtx.createBiquadFilter();
+            this.trebleControl.type = "highshelf";
+            this.trebleControl.frequency.setValueAtTime(1200, this.audioCtx.currentTime);
+            this.trebleControl.gain.setValueAtTime(this.treble, this.audioCtx.currentTime);
+            this.oscillator.connect(this.bassControl);
+            this.bassControl.connect(this.midControl);
+            this.midControl.connect(this.trebleControl);
+            this.trebleControl.connect(this.gainControl);
+            this.gainControl.connect(this.audioCtx.destination);
+            this.oscillator.start();
+        }
+
+        Tone.prototype.play = function () {
+            if (this.cancelStop === undefined) { //first call ths.cancelStop not yet defined
+                //do nothing
+            } else {
                 clearTimeout(this.cancelStop);
+            }
+            //this.gainControl.gain.cancelScheduledValues(this.audioCtx.currentTime);
+            this.gainControl.gain.setValueAtTime(this.gainControl.gain.value, this.audioCtx.currentTime);
+            this.gainControl.gain.linearRampToValueAtTime(1, this.audioCtx.currentTime + 0.03);
+            this.cancelStop = setTimeout(() => {
                 this.gainControl.gain.setValueAtTime(this.gainControl.gain.value, this.audioCtx.currentTime);
                 this.gainControl.gain.linearRampToValueAtTime(0, this.audioCtx.currentTime + 0.03);
-            }
+            }, this.durationMS - 30);
         }
+
+        Tone.prototype.stop = function () {
+            clearTimeout(this.cancelStop);
+            this.gainControl.gain.setValueAtTime(this.gainControl.gain.value, this.audioCtx.currentTime);
+            this.gainControl.gain.linearRampToValueAtTime(0, this.audioCtx.currentTime + 0.03);
+        }
+
 
         function isPlaying(mysound) {
             return !mysound.paused;
@@ -1115,6 +1231,10 @@
         // }
 
         function respondToControlsWithMove(character, negX, posX, negY, posY, faceDirection = false, widerEdge = true) {
+
+            let finalXMove = 0;
+            let finalYMove = 0;
+
             let wideFactor = 1.0;
             if (widerEdge === true) {
                 wideFactor = 0;
@@ -1131,7 +1251,8 @@
                 if (character.xPosition - wideFactor * (character.width) / 2.0 - negX < 0) {
                     //pass do nothing, don't move character out of area
                 } else {
-                    moveCharacterBy(character, negX, 0);
+                    //moveCharacterBy(character, negX, 0);
+                    finalXMove += negX;
                     //rotateByAngle(character, 10);
                 }
             }
@@ -1143,7 +1264,8 @@
                 if (character.xPosition + wideFactor * (character.width) / 2.0 + posX > game.playAreaWidth) {
                     //pass do nothing, don't move character out of area
                 } else {
-                    moveCharacterBy(character, posX, 0);
+                    //moveCharacterBy(character, posX, 0);
+                    finalXMove += posX;
                 }
             }
             if (game.controlUp === true) {
@@ -1151,7 +1273,8 @@
                 if (character.yPosition - wideFactor * (character.height) / 2.0 - negY < 0) {
                     //pass do nothing, don't move character out of area
                 } else {
-                    moveCharacterBy(character, 0, negY);
+                    //moveCharacterBy(character, 0, negY);
+                    finalYMove += negY;
                 }
             }
             if (game.controlDown === true) {
@@ -1159,8 +1282,21 @@
                 if (character.yPosition + wideFactor * (character.height) / 2.0 + posY > game.playAreaHeight) {
                     //pass do nothing, don't move character out of area
                 } else {
-                    moveCharacterBy(character, 0, posY);
+                    finalYMove += posY;
+                    //moveCharacterBy(character, 0, posY);
                 }
+            }
+
+            if ((finalYMove === 0) && (finalXMove !== 0)) {
+                moveCharacterBy(character, finalXMove, 0);
+            }
+            else if ((finalXMove === 0) && (finalYMove !== 0)) {
+                moveCharacterBy(character, 0, finalYMove);
+            }
+            else {
+                finalXMove = 0.707 * finalXMove;
+                finalYMove = 0.707 * finalYMove;
+                moveCharacterBy(character, finalXMove, finalYMove);
             }
             //if something is happening return true, allows for knowing if l/r/u/d being pressed at all, which
             //can be used to add sounds/visual effects while moving
@@ -1288,9 +1424,15 @@
         function randomNumberZeroToNumber(number) {
             value = Math.random() * (number + 1);
             value = Math.floor(value);
-            value = value;
             return value;
         }
+        function randomFloatLowToHigh(low, high) {
+            return Math.random() * (high - low) + low;
+        }
+        function randomIntLowToHigh(low, high) {
+            return Math.floor(Math.random() * (high - low + 1)) + low;
+        }
+
 
         // https://www.py4u.net/discuss/986510
 
@@ -1335,18 +1477,25 @@
             }
         }
     </script>
+
     <script>
         // ---------------------------GAME HERE----------------------------
-        //<main character>👾</main character>
 
+        //<main character>👾</main character>
+        //----------0-------android games modifications---------------
+        document.getElementById("userName").innerHTML=window.document.title;
+        document.getElementById("highScore").innerHTML="<a href='https://www.charwars.net'>CharWars</>";
+            
         //-------1-------define audio-------1-------
+
 
         function defineAudio() {
             blip = new Tone(220, 50, "sine", 0, 0, 0);
-            fireball = new Tone(110, 333, "sawtooth", 0, 0, -30);
+            fireball = new Tone(110, 333, "sawtooth", 0, -9, -30);
             insertCoin = new Tone(110, 200, "triangle", 0, 0, 0);
+            alienHit = new Tone(110,100,"triangle",0,0,0);
             swimTone = new Tone(6, 200, "sawtooth", 0, -9, -30);
-            backgroundmusic = new Tone(2, 1000, "sawtooth", 0, -9, -30);
+            backgroundmusic = new Tone(2, 1000, "sawtooth", 0, -15, -30);
         }
 
         //-------2-------define frame rate-------2-------
@@ -1418,7 +1567,16 @@
             }
         }
         placeAliens();
+        // function lineUpAliens() {
+        //     let alien0XPosition = aliens[0].getXPosition();
+        //     let alien0YPosition = aliens[0].getYPosition();
 
+        //     for (let i = 0; i < aliens.length; i++) {
+        //         let alienXPosition = (i % 4) * 40 + alien0XPosition;
+        //         let alienYPosition = (i % 4) * 40 + alien0YPosition;
+        //         moveCharacterTo(aliens[i], alienXPosition, alienYPosition);
+        //     }
+        // }
         function moveToLeftBorder() {
 
         }
@@ -1429,7 +1587,8 @@
 
         function moveAliens() {
             ySpeed = 0;
-
+            ////console.log"moveAliens() called");
+            ////console.log"alien speed", alienSpeed);
             for (let i = 0; i < aliens.length; i++) {
                 if (alienSpeed > 0) { //if moving right, check for any position > right
                     for (let j = 0; j < aliens.length; j++) {
@@ -1516,19 +1675,31 @@
 
             //move cannon
             if (respondToControlsWithMove(cannon, -3, 3, 0, 0, false)) {
-                soundplay(swimTone);
+                // soundplay(swimTone);
             }
 
+            //shoot bullet if space pressed
             if (spaceEvadersGame.getControlSpace()) {
                 //if bullet not flying, launch bullet
                 fireCannon();
             }
+
+
+            //shoot bullet from alien
+            //check for random number, if good enough
             if ((randomNumberZeroToNumber(100) > 90)) {
+                ////console.log"alien fire called");
+                //get lenth of alien and randomly choose one to fire from
+
                 fireAlienCannon();
             }
+
             if (alienBullet !== undefined) {
                 moveCharacterBy(alienBullet, 0, 3);
+                //check for alien bullet/cannon collision
                 if (collisionDetect(alienBullet, cannonBullet,0.1)) {
+                    soundplay(alienHit);
+                    //console.log"Bullets Collide!");
                     alienBullet.setText("");
                     removeCharacter(alienBullet);
                     alienBulletVelocity = 0;
@@ -1553,42 +1724,50 @@
                     alienBulletVelocity = 0;
                     removeCharacter(alienBullet);
                 }
-                else if (shield1 !== undefined) {
+                if (shield1 !== undefined) {
                     if (collisionDetect(alienBullet, shield1)) {
                         alienBullet.setText("");
                         removeCharacter(alienBullet);
                         alienBulletVelocity = 0;
+                        soundplay(fireball);
 
                         if (shield1.getColor() === "orange") {
                             shield1.setColor("orangered");
+                            soundplay(fireball);
                         }
                         else if (shield1.getColor() === "orangered") {
                             shield1.setColor("red");
+                            soundplay(fireball);
                         }
                         else if (shield1.getColor() === "red") {
                             removeCharacter(shield1);
                         }
+
                     }
                 }
-                else if (shield2 !== undefined) {
+                if (shield2 !== undefined) {
                     if (collisionDetect(alienBullet, shield2)) {
                         alienBullet.setText("");
                         removeCharacter(alienBullet);
                         alienBulletVelocity = 0;
-
                         if (shield2.getColor() === "orange") {
                             shield2.setColor("orangered");
+                            soundplay(fireball);
                         }
                         else if (shield2.getColor() === "orangered") {
                             shield2.setColor("red");
+                            soundplay(fireball);
                         }
                         else if (shield2.getColor() === "red") {
                             removeCharacter(shield2);
+                            soundplay(fireball);
                         }
                     }
                 }
+                //check for bullet/bullett collision
             }
 
+            //move bullet
             if (cannonBulletVelocity === 0) {
                 moveCharacterTo(cannonBullet, cannon.getXPosition(), cannon.getYPosition());
             }
@@ -1608,7 +1787,7 @@
                 ////console.logaliens.length);
                 if (collisionDetect(cannonBullet, aliens[i])) {
                     //aliens[i].setText("");
-
+                    soundplay(alienHit);
                     removeCharacter(aliens[i]);
                     aliens.splice(i, 1);
                     cannonBulletVelocity = 0;
@@ -1647,15 +1826,52 @@
                 clearInterval(myGameLoopTicker);
                 stopsound(backgroundmusic); //
 
-                //UPDATE SCORES IN DATABASE 
-                let thisGame = spaceEvadersGame; //!!!! change this line for each game
+                // if (document.getElementById('userName').innerHTML === "not logged in") {
+                //     message2 = new GameCharacter("message2id", "You must be logged in \n to save high score.", playAreaWidth / 2.0, playAreaHeight * .25, 0, spaceEvadersGame, "1rem");
+                // }
 
-                let finalScore = parseInt(document.getElementById("score").innerHTML);
-                let currentHighScore = parseInt(document.getElementById("highScore").innerHTML);
+                /////////////UPDATE SCORES IN DATABASE /////////////
+                // let thisGame = spaceEvadersGame; //!!!! change this line for each game
 
-                if (finalScore > currentHighScore) {
+                // let finalScore = parseInt(document.getElementById("score").innerHTML);
+                // let currentHighScore = parseInt(document.getElementById("highScore").innerHTML);
 
-                }
+                // if (finalScore > currentHighScore) {
+                //     if (document.getElementById('userName').innerHTML === "not logged in") {
+                //         message2 = new GameCharacter("message2id", "You must be logged in \n to save high score.", playAreaWidth / 2.0, playAreaHeight * .25, 0, thisGame, "1rem");
+                //         //do nothing
+                //     } else {
+                //         //alert('new high score');
+                //         message3 = new GameCharacter("message3id", "NEW HIGH SCORE!!!", playAreaWidth / 2.0, playAreaHeight * .25, 0, thisGame, "1rem");
+                //         let online = navigator.onLine;
+                //         //alert("online");
+                //         //alert(online);
+
+                //         if (online != false) {
+
+                //             gameIdentifier = gameIdentifier;
+                //             secretKey = secretKey;
+
+                //             //using POST//
+                //             let xmlhttp = new XMLHttpRequest();
+                //             xmlhttp.open('POST', '../../includes/insert-new-highscore.php', true);
+                //             xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                //             xmlhttp.onload = function () {
+                //                 // do something with response or after response
+                //                 //alert(this.responseText);
+                //                 ////console.logthis.responseText);
+                //                 setTimeout(() => {
+                //                     window.location.href = window.location.href; //reload window because there is not high score
+                //                 }, 3000);
+                //             };
+
+                //             let postString = 'gameidentifier=' + gameIdentifier + '&finalscore=' + finalScore + '&secretkey=' + secretKey;
+                //             //alert(postString);
+                //             xmlhttp.send(postString);
+                //         }
+                //     }
+                // }
+                ////////////////////////////////////////////////////
                 setTimeout(() => {
                     removeCharacter(message);
                     //-------6------- At end of game, add start button back-------6-------
