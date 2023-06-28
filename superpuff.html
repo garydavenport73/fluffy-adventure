@@ -266,7 +266,8 @@
 </head>
 
 <body class="flex-container-column-default">
-    <div><button id='close-button' onclick='self.close()'>Close</button></div>
+        <!--<div><button id='close-button' onclick='self.close()'>Close</button></div>-->
+    <div><button id='close-button'><a href="index.html">Close</a></button></div>
     <div class="flex-container-column-default" id="gameArea">
 
         <div class="flex-container-row-default" id="highScoreHeader">
@@ -1248,7 +1249,7 @@
         }
 
         // ---------------------------GAME HERE----------------------------
-
+        //<main character>🐡</main character>
         //   1 sounds
         function defineAudio() {
             blip = new Tone(220, 50, "sine", 0, 0, 0);

@@ -193,7 +193,11 @@
 </head>
 
 <body class="flex-container-column-default">
-    <div><button id='close-button' onclick='self.close()'>Close</button></div>
+        <!--<div><button id='close-button' onclick='self.close()'>Close</button></div>-->
+    <div><button id='close-button'><a href="index.html">Close</a></button></div>
+
+
+    
     <div class="flex-container-column-default" id="gameArea">
 
         <div class="flex-container-row-default" id="highScoreHeader">
@@ -1139,6 +1143,8 @@
 
 
         // ---------------------------GAME HERE----------------------------
+
+        //<main character>🐄</main character>
         function defineAudio() {
             gunshot = new Tone(110, 100, "sawtooth", 12, 0, -12);
             //gunshot = new Audio("gunshot.mp3");
