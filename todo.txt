@@ -1,12 +1,12 @@
-                standard library    removed classes
-spaceevaders    +                   +
-bottles         +                   +
-clipper
-cowdefender
-doon
-driverseat      +                   +
-jogger
-magicpig
-superpuff
+                standard library    removed classes close button fixed
+spaceevaders    +                   +               +
+bottles         +                   +               +
+clipper         +                   +
+cowdefender     +                   +               
+doon            +                   +
+driverseat      +                   +               +
+jogger          +                   +
+magicpig        +                   +
+superpuff       +                   +
 reindeer        +                   +
-turkey
+turkey          +                   +
