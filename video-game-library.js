@@ -1115,7 +1115,7 @@ function showControls(controlCode) {
         document.getElementById("right").style.gridArea = "right";
         document.getElementById("up").style.gridArea = "up";
         document.getElementById("down").style.gridArea = "down";
-        document.getElementById("controlsArea").style.gridTemplateColumns="auto auto auto auto auto";
+        document.getElementById("controlsArea").style.gridTemplateColumns="auto auto auto auto";
         document.getElementById("controlsArea").style.gridTemplateAreas="'left up up right' 'left down down right'";
     }
     else {
