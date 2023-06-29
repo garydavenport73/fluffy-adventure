@@ -1,0 +1,356 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    background-color:lightgrey;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: auto;
+}
+
+.noselect,
+#highScoreHeader *,
+#scoreboard *,
+#controlsArea>div>button,
+#close-button {
+    /* https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting */
+    cursor: default;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+
+.orange {
+    color: orange;
+}
+
+.grey {
+    color: grey;
+}
+
+.character-element {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: transparent;
+}
+
+/* generic flex container styling
+--------------------- */
+
+.flex-container-column-default {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.flex-container-row-default {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#controlsArea,
+#highScoreHeader,
+#scoreboard,
+#playArea {
+    width: 100%;
+    border: 1px solid green;
+}
+
+#btnLeft,
+#btnRight,
+#btnUp,
+#btnDown {
+    font-size: 2rem;
+    color: grey;
+}
+
+#btnSpace {
+    color: grey;
+    font-size: 2rem;
+    /* display: none; */
+}
+
+#highScoreHeader,
+#scoreboard {
+    height: 20px
+}
+
+#playArea {
+    /* desired height - highscore -scoreboard - control heights =409*/
+    /* 569−20−20−120=409*/
+    height: 470px;
+    position: relative;
+    overflow: hidden;
+}
+
+#gameArea {
+    border: solid 1px orange;
+    overflow: hidden;
+}
+
+#playArea>div {
+    font-size: 2rem;
+}
+
+#userName {
+    background-color: orange;
+}
+
+
+
+#start-button {
+    position: absolute;
+    display: inline-block;
+    left: 33%;
+    top: 70%;
+    margin: auto;
+    width: 33%;
+    height: 15%;
+    z-index: 99;
+}
+
+#restart-button {
+    position: absolute;
+    display: none;
+    left: 33%;
+    top: 70%;
+    margin: auto;
+    width: 33%;
+    height: 10%;
+    z-index: 99;
+}
+
+
+
+#highScore a{
+    text-decoration: none;
+}
+
+#highScore a:hover{
+    background-color: orange;
+}
+
+@media screen and (min-width: 375px) {
+    /* #controlsArea,
+#highScoreHeader,
+#scoreboard,
+#playArea {
+    width: 375px;
+    border: 1px solid green;
+} */
+.flex-container-column-default{
+    width: 375px;
+}
+}
+
+@media screen and (min-width: 768px) {
+    #controlsArea {
+        display: none;
+    }
+
+    #gameArea {
+        border: none;
+    }
+
+
+}
+#close-button {
+    background-color: transparent;
+    border: 1px solid beige;
+    width: 100%;
+
+}
+
+#close-button:hover {
+    background-color: orange;
+}
+
+#close-button a{
+    display: inline-block;
+    text-decoration: none;
+    width: 100%;
+}
+        a{
+    text-decoration: none;
+}
+
+
+/* #playAreaParent{
+position:relative;
+} */
+/****************** standard controls ******************/
+/* #space {
+grid-area: space;
+}
+
+
+#left {
+grid-area: left;
+}
+
+#right {
+grid-area: right;
+}
+
+#up {
+grid-area: up;
+}
+
+#down {
+grid-area: down;
+} */
+/* #controlsArea {
+display: grid;
+grid-template-columns: auto auto auto auto auto;
+grid-template-rows: 60px 60px;
+grid-template-areas: 'space space left up right' 'space space left down right';
+background-color: transparent;
+} */
+/****************** space up/down controls ******************/
+
+#space {
+    grid-area: space;
+}
+
+#left {
+    grid-area: left;
+}
+
+#right {
+    grid-area: right;
+}
+
+#up {
+    grid-area: up;
+}
+
+#down {
+    grid-area: down;
+}
+
+#controlsArea {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: 60px 60px;
+    grid-template-areas: 'space space left up right' 'space space left down right';
+    background-color: transparent;
+}
+
+/****************** space up/down controls end ******************/
+/****************** space up/down controls ******************/
+
+/* #space {
+    grid-area: space;
+}
+
+#left {
+    display: none;
+}
+
+#right {
+    display: none;
+}
+
+#up {
+    grid-area: up;
+}
+
+#down {
+    grid-area: down;
+}
+
+#controlsArea {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: 60px 60px;
+    grid-template-areas: 'space space up up up' 'space space down down down';
+    background-color: transparent;
+} */
+/****************** space up/down controls end ******************/
+/****************** space control ******************/
+/*         
+ #space {
+    grid-area: space;
+}
+
+#left {
+    display: none;
+}
+
+#right {
+    display: none;
+}
+
+#up {
+    display: none;
+}
+
+#down {
+    display: none;
+}
+
+#controlsArea {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: 60px 60px;
+    grid-template-areas: 'space space space space space' 'space space space space space';
+    background-color: transparent;
+
+}  */
+/****************** space controls end ******************/
+/****************** left/right up/down controls ******************/
+/*         
+#space {
+    display: none;
+}
+
+#left {
+    grid-area: left;
+}
+
+#right {
+    grid-area: right;
+}
+
+#up {
+    grid-area: up;
+}
+
+#down {
+    grid-area: down;
+}
+
+#controlsArea {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: 60px 60px;
+    grid-template-areas: 'left up up right' 'left down down right';
+    background-color: transparent;
+} */
+/****************** left/right up/down controls end ******************/
+/* https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting */
+
+#controlsArea>div>button {
+    width: 100%;
+    height: 100%;
+    -webkit-appearance: none;
+    border-radius: 0;
+    -webkit-border-radius: 0px;
+}
