@@ -15,7 +15,8 @@ for (let i=0;i<gameFiles.length;i++){
     let baseName=gameFiles[i].split(".html")[0];
     //find title name
     let contents=fs.readFileSync(filename,"utf8");
-    let title=getInnerText(contents,"title");
+    //let title=getInnerText(contents,"title");
+    let title=findFirstSplit(contents,'new MyLittleVideoGame("','"');
     let mainCharacter=getInnerText(contents,"main character");
     str+="<div class='icon-block'>\n";
     str+="<a href='"+filename+"' class='main-character-icon'>"+mainCharacter+"</a>\n";
@@ -28,6 +29,10 @@ console.log(str);
 function getInnerText(str,tag){
     str=str.replace("</"+tag+">","<"+tag+">");
     return str.split("<"+tag+">")[1].trim();
+}
+function findFirstSplit(str,tag1,tag2){
+    result=str.split(tag1)[1].split(tag2)[0];
+    return(result);
 }
 
 function findGameFiles(filename) {
