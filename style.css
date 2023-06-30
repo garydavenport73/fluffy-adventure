@@ -89,7 +89,8 @@ body {
 
 #highScoreHeader,
 #scoreboard {
-    height: 20px
+    height: 20px;
+    font-size: 18px;
 }
 
 #playArea {
@@ -113,16 +114,15 @@ body {
     background-color: orange;
 }
 
-
-
 #start-button {
     position: absolute;
     display: inline-block;
     left: 33%;
-    top: 70%;
+    top: 50%;
     margin: auto;
     width: 33%;
     height: 15%;
+    font-size: 1.2rem;
     z-index: 99;
 }
 
@@ -130,11 +130,16 @@ body {
     position: absolute;
     display: none;
     left: 33%;
-    top: 70%;
+    top: 50%;
     margin: auto;
     width: 33%;
     height: 10%;
+    font-size: 1.2rem;
     z-index: 99;
+}
+#close-anchor-tag{
+    background-color: salmon;
+    color: snow;
 }
 
 
@@ -172,20 +177,20 @@ body {
 
 }
 #close-button {
-    background-color: transparent;
+    /* background-color: transparent;
     border: 1px solid beige;
-    width: 100%;
+    width: 100%; */
 
 }
 
 #close-button:hover {
-    background-color: orange;
+    /* background-color: orange; */
 }
 
 #close-button a{
-    display: inline-block;
+    /* display: inline-block;
     text-decoration: none;
-    width: 100%;
+    width: 100%; */
 }
         a{
     text-decoration: none;
