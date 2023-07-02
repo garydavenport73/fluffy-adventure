@@ -1,0 +1,21 @@
+Sound                   Mandatory
+
+insert coin *           yes
+
+gunshot *               yes
+
+fireball/explosion *    yes
+
+pitter patter slow
+
+pitter patter fast
+
+eat pellet *
+
+blip *
+
+crash *
+
+helicopter *
+
+car *

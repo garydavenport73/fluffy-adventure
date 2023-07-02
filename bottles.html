@@ -60,6 +60,7 @@
     </div>
 
 <script src="video-game-library.js"></script>
+<script src="soundLibrary.js"></script>
 <script>
 
 // ---------------------------GAME HERE----------------------------
@@ -70,12 +71,16 @@
 
             introMusic = new Tone(330, 2000, "sine", 0, 0, 0);
             //introMusic = new Audio("intro99bottles.mp3");
-
+            introMusic=powerUp;
             insertcoin = new Tone(110, 200, "triangle", 0, 0, -6);
             //insertcoin = new Audio("insertcoin.mp3");
+            insertCoin=pickupCoin;
 
             breakingGlass = new Tone(110, 300, "sawtooth", 0, 0, -15);
+            breakingGlass = hitHurt;
             //breakingGlass = new Audio("breakingglass.mp3");
+            //footsteps = new Tone(3, 500, "square", 2, -5, -12);
+            //backGroundLoop=loopsound(footsteps);
         }
 
         //-------2-------define frame rate-------2-------
