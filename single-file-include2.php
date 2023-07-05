@@ -1,0 +1,36 @@
+</head>
+<body class="flex-container-column-default">
+    <div class="flex-container-column-default" id="gameArea">
+        <div class="flex-container-row-default" id="highScoreHeader">
+            <span id="userName">not logged in</span>
+            <span>
+                <span id="highScore">0</span>
+            </span>
+            <span><b><a id="close-anchor-tag" href="index.html">&nbsp;&times&nbsp;</a></b></span>
+        </div>
+        <div class="flex-container-row-default" id="scoreboard">
+            <span>
+                <span>Level:</span>
+                <span id="level">100</span>
+            </span>
+            <span>
+                <span>Score:</span>
+                <span id="score">100</span>
+            </span>
+            <span>
+                <span>Lives:</span>
+                <span id="lives">100</span>
+            </span>
+        </div>
+        <div id="playArea">
+            <button id="start-button">Begin</button>
+            <button id="restart-button">Play Again</button>
+        </div>
+        <div id="controlsArea">
+            <div id="space"><button id="btnSpace">&#8861;</button></div>
+            <div id="left"><button id="btnLeft">&#8678;</button></div>
+            <div id="right"><button id="btnRight">&#8680;</button></div>
+            <div id="up"><button id="btnUp">&#8679;</button></div>
+            <div id="down"><button id="btnDown">&#8681;</button></div>
+        </div>
+    </div>
