@@ -1,66 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CharWars</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="flex-container-column-default">
-    <!--<div><button id='close-button' onclick='self.close()'>Close</button></div>-->
-    <!-- <span class="flex-container-column-default"><button id='close-button'><a href="index.html">Close</a></button></span> -->
-    <div class="flex-container-column-default" id="gameArea">
-
-        <div class="flex-container-row-default" id="highScoreHeader">
-            <span id="userName">not logged in</span>
-
-            <span>
-                <!-- <span>High Score:</span> -->
-                <span id="highScore">0</span>
-            </span>
-            <span><b><a id="close-anchor-tag" href="index.html">&nbsp;&times&nbsp;</a></b></span>
-            <!-- <span> -->
-                <!-- <span>Days:</span> -->
-                <!-- <span id="daysAtHighScore">182</span> -->
-            <!-- </span> -->
-
-        </div>
-        <div class="flex-container-row-default" id="scoreboard">
-            <span>
-                <span>Level:</span>
-                <span id="level">100</span>
-            </span>
-
-            <span>
-                <span>Score:</span>
-                <span id="score">100</span>
-            </span>
-
-            <span>
-                <span>Lives:</span>
-                <span id="lives">100</span>
-            </span>
-        </div>
-        <div id="playArea">
-            <button id="start-button">Begin</button>
-            <button id="restart-button">Play Again</button>
-
-        </div>
-        <!-- normal -->
-        <div id="controlsArea">
-            <div id="space"><button id="btnSpace">&#8861;</button></div>
-            <div id="left"><button id="btnLeft">&#8678;</button></div>
-            <div id="right"><button id="btnRight">&#8680;</button></div>
-            <div id="up"><button id="btnUp">&#8679;</button></div>
-            <div id="down"><button id="btnDown">&#8681;</button></div>
-        </div>
-    </div>
-    <script src="video-game-library.js"></script>
-
-
-    <script>
         // ---------------------------GAME HERE----------------------------
 
 
@@ -302,7 +240,4 @@
         //<main character>🚘</main character>
         document.getElementById("userName").innerHTML = window.document.title;
         document.getElementById("highScore").innerHTML = "<a href='https://www.charwars.net'>CharWars</>";;
-    </script>
-</body>
-
-</html>
+ 

@@ -1,5 +1,5 @@
-rm soundLibrary.js;
-touch soundLibrary.js;
+rm sound-library.js;
+touch sound-library.js;
 for file in *.mp3
 do
     #show current filename
@@ -21,8 +21,9 @@ do
     #str=$str\"\n\n;
     echo $str>$filename;
     #add to sound library
-    echo $str>>soundLibrary.js;
+    echo $str>>sound-library.js;
     #extra line in libary for readability
-    echo >>soundLibrary.js;
-
+    echo >>sound-library.js;
 done;
+
+cp -f sound-library.js ../..
