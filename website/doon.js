@@ -2,27 +2,31 @@
 
         // ---------------------------GAME HERE----------------------------
 
-
+        let gunshot;
+        let fireball;
+        //let insertCoin;
 
         function defineAudio() {
 
-            gunshot = new Tone(110, 100, "sawtooth", 12, 0, -12);
+            //gunshot = new Tone(110, 100, "sawtooth", 12, 0, -12);
             //gunshot = new Audio("gunshot.mp3");
-
-            fireball = new Tone(110, 333, "sawtooth", 0, 0, -12);
+            gunshot=thinLaserShoot;
+            //fireball = new Tone(110, 333, "sawtooth", 0, 0, -12);
 
             //fireball = new Audio("fireball.mp3");
+            fireball=explosion;
 
-            insertCoin = new Tone(110, 200, "triangle", 0, 0, 0);
-
+            //insertCoin = new Tone(110, 200, "triangle", 0, 0, 0);
+            insertCoin=insertCoin;
             //insertCoin = new Audio("insertcoin.mp3");
 
 
-            helicopterChange = new Tone(8, 500, "square", 0, -6, -24);
+            //helicopterChange = new Tone(8, 500, "square", 0, -6, -24);
             //helicopterChange = new Audio("helicopterclip1.mp3");
+            helicopterChange=footstep;
 
-
-            backgroundmusic = new Tone(4, 1000, "square", 0, -2, -24);
+            //backgroundmusic = new Tone(4, 1000, "square", 0, -2, -24);
+            backgroundmusic=engineIdleFading;
             //backgroundmusic = new Audio("background.mp3");
         }
 
@@ -371,7 +375,7 @@
                                     //heroPilot.setText('&#128641;');
                                     replaceVillain(villains[i], i);
                                 }, 2000);
-                                soundplay(insertCoin);
+                                soundplay(powerUp);
                                 spinningMessage("Refueled!", doonGame);
                                 fuelLeft = framesPerSecond * defaultFuelTime;
 

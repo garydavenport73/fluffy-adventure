@@ -7,19 +7,21 @@
 
         //-------1-------define audio-------1-------
         function defineAudio() {
-            backgroundSound = new Tone(28, 1000, "sawtooth", 0, -6, -30);
+            //backgroundSound = new Tone(28, 1000, "sawtooth", 0, -6, -30);
             //backgroundSound = new Audio("steadyenginelooped.mp3");
             //cat = new Audio("cat.mp3");
-            speeding = new Tone(48, 500, "sawtooth", 0, -6, -30);
-
-            fireball = new Tone(110, 333, "sawtooth", 0, 0, -12);
+            backgroundSound=engineIdleFading;
+            
+            //speeding = new Tone(48, 500, "sawtooth", 0, -6, -30);
+            speeding=footstep;
+            //fireball = new Tone(110, 333, "sawtooth", 0, 0, -12);
             //fireball = new Audio("fireball.mp3");
-
+            fireball=explosion;
             //cat = new Tone(110, 333, "sawtooth", 0, 0, -12);
 
             //cow
-            cat = new Tone(55, 1000, "sawtooth", 0, 0, -12);
-
+            //cat = new Tone(55, 1000, "sawtooth", 0, 0, -12);
+            cat = explosion;
         }
 
         //-------2-------define frame rate-------2-------
@@ -79,6 +81,7 @@
             //makes start button dissappear
             this.style.display = "none";
             defineAudio();
+            soundplay(insertCoin);
             //start game loop
             loopsound(backgroundSound);
             setTimeout(() => {

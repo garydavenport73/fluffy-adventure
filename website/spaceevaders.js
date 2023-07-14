@@ -7,12 +7,13 @@
         //-------1-------define audio-------1-------
 
         function defineAudio() {
-            blip = new Tone(220, 50, "sine", 0, 0, 0);
-            fireball = new Tone(110, 333, "sawtooth", 0, -9, -30);
-            insertCoin = new Tone(110, 200, "triangle", 0, 0, 0);
-            alienHit = new Tone(110, 100, "triangle", 0, 0, 0);
-            swimTone = new Tone(6, 200, "sawtooth", 0, -9, -30);
-            backgroundmusic = new Tone(2, 1000, "sawtooth", 0, -15, -30);
+            //blip = new Tone(220, 50, "sine", 0, 0, 0);
+
+            fireball = explosion;//new Tone(110, 333, "sawtooth", 0, -9, -30);
+            //insertCoin = new Tone(110, 200, "triangle", 0, 0, 0);
+            alienHit = blip;//new Tone(110, 100, "triangle", 0, 0, 0);
+            swimTone = footstep;//new Tone(6, 200, "sawtooth", 0, -9, -30);
+            backgroundmusic = alienBackground;//new Tone(2, 1000, "sawtooth", 0, -15, -30);
         }
 
         //-------2-------define frame rate-------2-------
@@ -154,8 +155,12 @@
         }
 
         function fireCannon() {
+            if (cannonBulletVelocity!==-7){
+                soundplay(thinLaserShoot);
+            }
             cannonBulletVelocity = -7;
             //console.log"fire cannon called");
+            
         }
 
         function fireAlienCannon() {
@@ -306,10 +311,11 @@
                 removeCharacter(shield1);
                 removeCharacter(shield2);
                 makeShields();
-                soundplay(insertCoin);
+                soundplay(powerUp);
 
 
                 spinningMessage("Level Up!", spaceEvadersGame, 1.5);
+
                 spaceEvadersGame.increaseLevel(1);
 
 

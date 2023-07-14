@@ -6,11 +6,11 @@
 
         //   1 sounds
         function defineAudio() {
-            blip = new Tone(220, 50, "sine", 0, 0, 0);
-            fireball = new Tone(110, 333, "sawtooth", 0, 0, -30);
-            insertCoin = new Tone(110, 200, "triangle", 0, 0, 0);
-            swimTone = new Tone(6, 200, "sawtooth", 0, -9, -30);
-            backgroundmusic = new Tone(2, 1000, "sawtooth", 0, -9, -30);
+            //blip = new Tone(220, 50, "sine", 0, 0, 0);
+            fireball = explosion;//new Tone(110, 333, "sawtooth", 0, 0, -30);
+            insertCoin = powerUp;// new Tone(110, 200, "triangle", 0, 0, 0);
+            swimTone = footstep;//new Tone(6, 200, "sawtooth", 0, -9, -30);
+            backgroundmusic = wind;//new Tone(2, 1000, "sawtooth", 0, -9, -30);
         }
 
         //-------2-------define frame rate-------2-------
@@ -155,7 +155,7 @@
                         fishes[i].setText("");
                         fishGame.addToScore(1);
                         fishesLeft = fishesLeft - 1;
-                        soundplay(insertCoin);
+                        soundplay(jump);
                     } else {
                         fishes[i].setSizeInEms(fishes[i].getSizeInEms() + 1);
                         blowFish.setText("");

@@ -1,15 +1,31 @@
 
 // ---------------------------GAME HERE----------------------------
-
+let gunshot;
+let helicopterChange;
+let carMoving;
+let backgroundmusic;
+let crash;
+//let insertcoin;
+let levelup;
 //-------1-------define audio-------1-------
 function defineAudio() {
 
 gunshot = new Tone(110, 100, "sawtooth", 12, 0, -12);
-helicopterChange = new Tone(8, 500, "square", 0, -6, -24);
-carMoving = new Tone(4, 500, "square", 0, -6, -24);
-backgroundmusic = new Tone(4, 1000, "square", 0, -2, -24);
+gunshot=blip;
+//helicopterChange = new Tone(8, 500, "square", 0, -6, -24);
+//helicopterChange=engineIdle;
+//carMoving = new Tone(4, 500, "square", 0, -6, -24);
+carMoving=footstep;
+//carMoving=engineIdle;
+//backgroundmusic = new Tone(4, 1000, "square", 0, -2, -24);
+backgroundmusic=engineIdleFading;
+
+
 crash = new Tone(110, 400, "triangle", 0, 0, 0);
-insertcoin = new Tone(330, 400, "triangle", -3, -3, -6);
+crash=explosion;
+//insertcoin = new Tone(330, 400, "triangle", -3, -3, -6);
+insertcoin=insertCoin;
+levelup=powerUp;
 }
 
 //-------2-------define frame rate-------2-------
@@ -51,7 +67,7 @@ lines1.setColor("orange");
 function moveLines() {
 if (dogderGame.getControlSpace()) {
     speed = fastSpeed;
-    soundplay(helicopterChange);
+    soundplay(click);
 } else {
     speed = slowSpeed;
 }
@@ -167,7 +183,7 @@ if (counter % 1000 === 0) {
         }
     }
     spinningMessage("Level up!", dogderGame);
-    soundplay(insertcoin);
+    soundplay(levelup);
     dogderGame.increaseLevel(1);
 }
 

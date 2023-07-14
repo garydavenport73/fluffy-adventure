@@ -4,12 +4,13 @@
         //-------1-------define audio-------1-------
         function defineAudio() {
 
-            gunshot = new Tone(110, 100, "sawtooth", 12, 0, -12);
-            helicopterChange = new Tone(8, 500, "square", 0, -6, -24);
-            pigletMoving = new Tone(6, 500, "square", 0, -6, -24);
-            backgroundmusic = new Tone(4, 1000, "square", 0, -2, -24);
-            crash = new Tone(110, 400, "triangle", 0, 0, 0);
-            insertcoin = new Tone(330, 400, "triangle", -3, -3, -6);
+
+            //helicopterChange = new Tone(8, 500, "square", 0, -6, -24);
+            helicopterChange=click;
+            //pigletMoving = new Tone(6, 500, "square", 0, -6, -24);
+            backgroundmusic = engineIdleFading;//new Tone(4, 1000, "square", 0, -2, -24);
+            crash = explosion;//new Tone(110, 400, "triangle", 0, 0, 0);
+            insertcoin = insertCoin;//new Tone(330, 400, "triangle", -3, -3, -6);
         }
 
         //-------2-------define frame rate-------2-------
@@ -167,7 +168,7 @@
                 setXPosition(barrier2,playAreaWidth);
                 setYPosition(barrier2,barrierStartPosition+barrierHeight+100);
                 pigletGame.addToScore(1);
-                soundplay(insertcoin);
+                soundplay(pickupCoin);
 
             }
 
@@ -192,7 +193,7 @@
             if (counter % 1000 === 0) {
                 counter = 0;
                 spinningMessage("Level up Pinky!", pigletGame);
-                soundplay(insertcoin);
+                soundplay(powerUp);
                 pigletGame.increaseLevel(1);
             }
 

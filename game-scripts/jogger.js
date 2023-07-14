@@ -7,11 +7,13 @@
 //-------1-------define audio-------1-------
 function defineAudio() {
 
-    footsteps = new Tone(2.5, 500, "square", 2, -5, -12);
+    //footsteps = new Tone(2.5, 500, "square", 2, -5, -12);
+    footsteps=footstep;
     //clover = new Tone(333, 440, "triangle", 0, 0, 0);
-    crash = new Tone(110, 400, "triangle", 0, 0, 0);
-    insertcoin = new Tone(330, 400, "triangle", -3, -3, -6);
-
+    //crash = new Tone(110, 400, "triangle", 0, 0, 0);
+    crash=explosion;
+    //insertcoin = new Tone(330, 400, "triangle", -3, -3, -6);
+    insertcoin=insertCoin;
     //footsteps = new Audio("footsteps.mp3");
     //crash = new Audio("crash.mp3");
     //insertcoin = new Audio("insertcoin.mp3");
@@ -106,6 +108,7 @@ function startGame() {
     //makes start button dissappear
     this.style.display = "none";
     defineAudio();
+    soundplay(insertCoin)
     //start game loop
     setTimeout(() => {
         myGameLoopTicker = setInterval(gameLoop, interval);
@@ -167,7 +170,7 @@ function gameLoop() {
                 stopsound(footsteps);
             }
             //soundplay("insertcoin.mp3");
-            soundplay(insertcoin);
+            soundplay(pickupCoin);
             //
             setTimeout(() => {
                 //place person at origin

@@ -3,13 +3,17 @@
 
 
         //-------1-------define audio-------1-------
+        let footsteps;
+        let clover;
+        //let insertCoin;
         function defineAudio() {
 
-
-            footsteps = new Tone(3, 500, "square", 2, -5, -12);
-            clover = new Tone(333, 440, "triangle", 0, 0, 0);
-            insertcoin = new Tone(110, 200, "triangle", 0, 0, 0);
-
+            footsteps= footstep;
+            //footsteps = new Tone(3, 500, "square", 2, -5, -12);
+            clover=blip;
+            //clover = new Tone(333, 440, "triangle", 0, 0, 0);
+            //insertCoin = new Tone(110, 200, "triangle", 0, 0, 0);
+            insertCoin=insertCoin;
             // footsteps = new Audio("footsteps.mp3");
             // crash = new Audio("crash.mp3");
             // insertcoin = new Audio("insertcoin.mp3");
@@ -72,6 +76,7 @@
             //makes start button dissappear
             this.style.display = "none";
             defineAudio();
+            soundplay(insertCoin);
             //start game loop
             setTimeout(() => {
                 myGameLoopTicker = setInterval(gameLoop, interval);
@@ -98,10 +103,12 @@
                     spinningMessage("four leaf clover!", clipperGame);
 
                     clipperGame.addToScore(4);
-                    clover.play();
+                    soundplay(powerUp);
+                    //clover.play();
                 } else {
                     clipperGame.addToScore(1);
-                    insertcoin.play();
+                    soundplay(blip);
+                    //insertCoin.play();
                 }
                 tempy.setText("");
 

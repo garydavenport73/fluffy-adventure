@@ -2,16 +2,19 @@
 
 // ---------------------------GAME HERE----------------------------
 //-------1-------define audio-------1-------
+let introMusic;
+//let insertCoin;
+let breakingGlass;
 function defineAudio() {
 
-    introMusic = new Tone(330, 2000, "sine", 0, 0, 0);
+    //introMusic = new Tone(330, 2000, "sine", 0, 0, 0);
     //introMusic = new Audio("intro99bottles.mp3");
     introMusic = powerUp;
-    insertcoin = new Tone(110, 200, "triangle", 0, 0, -6);
+    //insertcoin = new Tone(110, 200, "triangle", 0, 0, -6);
     //insertcoin = new Audio("insertcoin.mp3");
-    insertCoin = pickupCoin;
+    insertCoin = insertCoin;
 
-    breakingGlass = new Tone(110, 300, "sawtooth", 0, 0, -15);
+    //breakingGlass = new Tone(110, 300, "sawtooth", 0, 0, -15);
     breakingGlass = hitHurt;
     //breakingGlass = new Audio("breakingglass.mp3");
     //footsteps = new Tone(3, 500, "square", 2, -5, -12);
@@ -78,7 +81,7 @@ function startGame() {
     this.style.display = "none";
     defineAudio();
     //start game loop
-    soundplay(introMusic);
+    soundplay(insertCoin);
     // alert(userName);
     setTimeout(() => {
         myGameLoopTicker = setInterval(gameLoop, interval);
@@ -96,7 +99,7 @@ function gameLoop() {
         catchMessage = new GameCharacter("caughtmessageid", "Good catch!", playAreaWidth * .9, playAreaHeight * .75, 30, bottleGame, "1rem");
         // catchMessage.setBackgroundColor("tan");
         catchMessage.setColor("green");
-        soundplay(insertcoin);
+        soundplay(blip);
         bottleGame.addToScore(1);
         caughtBottle = currentBottle;
         caughtBottle.setText("");
@@ -104,7 +107,7 @@ function gameLoop() {
         bottleNumber = bottleNumber % 10;
         if (bottleRow == 9 && bottleNumber == 9) {
             winMessage = new GameCharacter("winmessageid", "You Won!", playAreaWidth / 2.0, playAreaHeight * .75, 0, bottleGame, "1rem");
-            soundplay(introMusic);
+            soundplay(powerUp);
             //end of game reached
             clearInterval(myGameLoopTicker);
         } else {

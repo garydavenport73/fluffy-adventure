@@ -1,20 +1,25 @@
 
 // ---------------------------GAME HERE----------------------------
-
+let gunshot;
+let fireball;
+let cowSound;
+//let insertCoin;
 
 function defineAudio() {
-    gunshot = new Tone(110, 100, "sawtooth", 12, 0, -12);
+    //gunshot = new Tone(110, 100, "sawtooth", 12, 0, -12);
     //gunshot = new Audio("gunshot.mp3");
+    gunshot=laserShoot;
 
-    fireball = new Tone(110, 333, "sawtooth", 0, 0, -12);
-
+    //fireball = new Tone(110, 333, "sawtooth", 0, 0, -12);
+    fireball=explosion;
     //fireball = new Audio("fireball.mp3");
 
-    cowSound = new Tone(55, 1000, "sawtooth", 0, 0, -12);
+    //cowSound = new Tone(55, 1000, "sawtooth", 0, 0, -12);
     //cowSound = new Audio("dead_cow.mp3");
-
-    insertCoin = new Tone(110, 200, "triangle", 0, 0, 0);
+    cowSound=hitHurt;
+    //insertCoin = new Tone(110, 200, "triangle", 0, 0, 0);
     //insertCoin = new Audio("insertcoin.mp3");
+    insertCoin=insertCoin;
 }
 
 
@@ -145,7 +150,7 @@ function gameLoop() {
                 meteor.setText('&#129364;');
             }
 
-        }, 1000);
+        }, 500);
 
     } else {
         moveCharacterBy(meteor, randomNumberZeroToNumber(2), 3);

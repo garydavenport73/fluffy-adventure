@@ -1,0 +1,18 @@
+                audio completed
+bottles         done
+clipper         done
+cowdefender     done
+dodger          done
+doon
+driverseat
+jogger
+list.txt
+magicpig
+reindeergames
+spaceevaders
+superpuff
+turkey
+
+choices:
+blip.wav  explosion.wav  hitHurt.wav  laserShoot.wav  powerUp.wav  thinLaserShoot.wav
+click.wav       footstep.wav   jump.wav     pickupCoin.wav  synth.wav    tone.wav

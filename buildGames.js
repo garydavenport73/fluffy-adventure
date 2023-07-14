@@ -1,7 +1,21 @@
+
+
 const fs = require('fs');
+// const del = require('del');
+
+// ;(async () => {
+//     try {
+//       await del("website");  
+//       console.log(`${dir} is deleted!`);
+//     } catch (err) {
+//       console.error(`Error while deleting ${dir}.`);
+//     }
+//   })();
+
+
 //const path=require('path');
 let files = fs.readdirSync("game-scripts");
-fs.mkdir("website",()=>{console.log("trying to make directory test")});
+fs.mkdirSync("website",()=>{console.log("trying to make directory test")});
 
 for (let i=0;i<files.length;i++){
     console.log(files[i]);
