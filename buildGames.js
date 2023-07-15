@@ -78,7 +78,7 @@ let str="<!DOCTYPE html>\n\
 <link rel='stylesheet' href='index-style.css'>\n\
 </head>\n\
 <body>\n\
-    <h1><a href='index.html' target='_blank'>CharWars</a></h1>\n";
+    <h1><a href='https://www.charwars.net' target='_blank'>CharWars</a></h1>\n";
 str+="<div id='icon-blocks-container'>\n";
 for (let i=0;i<files.length;i++){
     let filename=files[i];
