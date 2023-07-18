@@ -1,3 +1,5 @@
+(Privacy Policy: The CharWars Android app does not collect or store any user data.)
+
 # fluffy-adventure
 A collection of 2D games that will run in an html browser, mobile friendly.  
 
