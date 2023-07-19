@@ -1,14 +1,11 @@
-Have you ever sent a text, but no one received it?
-Have you ever received an email or text with a missing character?
-You may have been the victim of a Wild Emoji.
-Hi, I'm Odder Evans. I'll be your guide.
-I am not asking you to believe me, but only suspend your disbelief while you listen to my story. If I hadn't been a witness to these events, I probably wouldn't believe either.
-It all started shortly before the year 2000...
-A misplaced worry - As fate would have it, shortly before January 1st, 2000, a group of scientists were working on cutting-edge algorithms to enable computers to gain artificial intelligence.
-There was significant concern their algorithms might be lost or compromised as the year 2000 approached.
-All scientists can recall that time when fear hung in the air, at the approaching millenial or Y2K bug.
-In one particular AI laboratory, scientists had been storing all their AI algorighims on a single drive. (The name of the lab has been withheld to protect the guilty).
-A growing trend of texting...
-This was also a time when public use of the internet was still in a growth phase, and texting was on its way to becoming a preferrred method of communication. Email had already been popularized.
-The need for more text characters prompts program development...
-In that same AI laboratory, a rogue scientist had been working on a graphics program to produce utf-characters that could display emotion and content pictorally. It was clear that simple ascii text characters were not enough to convey meanin
+These are a collection of sample games where text characters are animated and used in 2-D video games.  From the website CharWars.net, here are samples of the back story...
+
+    "In one particular AI laboratory, scientists had been storing all their AI algorithms on a single drive. (The name of the lab has been withheld to protect the guilty).
+    In that same AI laboratory, a rogue scientist had been working on a graphics program to produce UTF-characters that could display emotion and content pictorially. It was clear that simple ASCII text characters were not enough to convey meaning.
+    In an effort to thwart the threat of the Y2K bug, the scientists took extra precautions, “striping” their hard drives, and saving pieces of data from multiple hard drives on each other. This way if one drive failed, the contents of other drives could be restored.
+    Somehow, during the data backup, the AI algorithm's code was accidentally mixed with the emoji making program's code, giving the emojis the ability to learn. This went unnoticed, until several texts and emails were sent from the computer using these 'Wild Emojis'.
+    Recipients noticed unusual missing characters. At first, these anomalies were overlooked, but it soon became evident this was a pattern, and something had gone terribly wrong.
+    These UTF-characters, now not-so commonly known as 'Wild Emojis', had made their escape during transmission. Now they are sometimes found roaming in computer systems, phones, and the like. 
+    These Wild Emojis still live on."
+
+Please enjoy the games and feel free to visit the Adventureland at CharWars.net.
